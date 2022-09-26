@@ -24,6 +24,8 @@ const findAllPeople = function (n, meetings, firstPerson) {
 };
 
 class UnionFind {
+  arr;
+
   constructor(n) {
     this.arr = Array(n).fill(null);
     this.arr.forEach((e, i, arr) => (arr[i] = i));
