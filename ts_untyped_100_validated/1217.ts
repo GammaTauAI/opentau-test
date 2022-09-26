@@ -74,7 +74,11 @@ const minPushBox = function (grid) {
         const nk = dkey(nb, b);
 
         if (set.has(nk)) continue;
-        if (valid(nb) && valid(np) && chk(p, np, b)) {
+        let nb0 = nb[0],
+          nb1 = nb[1];
+        let np0 = np[0],
+          np1 = np[1];
+        if (valid([nb0, nb1]) && valid([np0, np1]) && chk(p, np, b)) {
           tmp.push([v + 1, nb, b]);
           set.add(nk);
         }

@@ -2,7 +2,7 @@ var maxProduct = function (s) {
   const n = s.length;
   let max = 0;
   for (let i = 0; i < 1 << n; i++) {
-    let n0 = palindromic(i, s, true);
+    let n0 = palindromic(i, s);
     if (n0 === 0) continue;
     for (let j = 0; j < 1 << n; j++) {
       if ((i & j) > 0) continue;
@@ -11,6 +11,7 @@ var maxProduct = function (s) {
   }
   return max;
 };
+
 function palindromic(i, s) {
   const n = s.length;
   let sub = "";

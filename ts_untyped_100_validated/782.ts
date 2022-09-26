@@ -1,4 +1,5 @@
 class Skiplist {
+  head;
   constructor() {
     this.head = { down: null, right: null, val: -Infinity };
   }

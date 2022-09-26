@@ -1,5 +1,6 @@
 const lowBit = (x) => x & -x;
 class FenwickTree {
+  sum;
   constructor(n) {
     if (n < 1) return;
     this.sum = Array(n + 1).fill(0);

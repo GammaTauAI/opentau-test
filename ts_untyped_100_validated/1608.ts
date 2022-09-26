@@ -16,6 +16,10 @@ const findMaxValueOfEquation = function (points, k) {
 };
 
 class PriorityQueue {
+  heap;
+  top;
+  comparator;
+
   constructor(comparator = (a, b) => a > b) {
     this.heap = [];
     this.top = 0;

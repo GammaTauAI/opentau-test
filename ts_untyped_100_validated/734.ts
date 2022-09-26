@@ -16,6 +16,8 @@ var maxSlidingWindow = function (nums, k) {
 };
 
 class Deque {
+  head;
+  tail;
   constructor() {
     this.head = new Node();
     this.tail = this.head;
@@ -39,7 +41,7 @@ class Deque {
   }
 
   enqueue(value) {
-    this.tail.next = new Node(value);
+    this.tail.next = new DequeNode(value);
     this.tail.next.prev = this.tail;
     this.tail = this.tail.next;
   }
@@ -50,7 +52,10 @@ class Deque {
   }
 }
 
-class Node {
+class DequeNode {
+  value;
+  next;
+  prev;
   constructor(value) {
     this.value = value;
     this.next = null;
