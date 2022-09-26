@@ -1,4 +1,5 @@
 class BitSet {
+  arr;
   constructor(n) {
     this.arr = Array(n).fill(0);
   }
