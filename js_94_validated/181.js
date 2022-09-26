@@ -43,5 +43,3 @@ class UnionFind {
     this.arr[a] = a;
   }
 }
-
-// another
