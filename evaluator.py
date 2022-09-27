@@ -1,22 +1,24 @@
 import os
 import time
 import sys
-import csv
 import json
 import subprocess
 from typing import Dict
 
 
-if len(sys.argv) != 5:
+if len(sys.argv) != 5 or len(sys.argv) != 6:
     print(
         f"USAGE: {sys.argv[0]} test-file-dir/ perm.json client.bin out/results.csv")
     sys.exit(1)
-
 
 _TEST_DIR = sys.argv[1]
 _PERM_JSON = sys.argv[2]
 _CLIENT_PATH = sys.argv[3]
 _RESULTS_PATH = sys.argv[4]
+if len(sys.argv) == 6:
+    _SAVE_DIR = sys.argv[5]
+else:
+    _SAVE_DIR = '/tmp/deleteme'
 _CODEX_TOKEN = os.environ['OPENAI_API_KEY']
 _CSV_HEADER = f'file,language,strategy,retries,num_comp,temp,status\n'
 
@@ -47,7 +49,7 @@ def main() -> None:
 
     with open(_PERM_JSON) as f:
         perms = [Permutation.deserialize(i) for i in json.load(f)]
-
+    
     with open(_RESULTS_PATH, 'w') as write_file:
         write_file.write(_CSV_HEADER)
         for f in files:
@@ -56,7 +58,7 @@ def main() -> None:
             lang = f.split(".")[-1]
             for p in perms:
                 print(f"running {filepath} with {p.__repr__()}")
-                cmd = f"{_CLIENT_PATH} --token {_CODEX_TOKEN} --file {filepath} --output /tmp/deleteme --lang {lang} --retries {p.r} --n {p.n} --temp {p.temp} --strategy {p.strategy}"
+                cmd = f"{_CLIENT_PATH} --token {_CODEX_TOKEN} --file {filepath} --output {_SAVE_DIR} --lang {lang} --retries {p.r} --n {p.n} --temp {p.temp} --strategy {p.strategy}"
                 cmd_ = cmd.split()
                 sp = subprocess.Popen(
                     cmd_, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
