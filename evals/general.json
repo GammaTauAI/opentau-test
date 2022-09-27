@@ -1,0 +1,7 @@
+[
+  {"n": 5, "r": 3, "temp": 1, "strategy": "simple"},
+  {"n": 10, "r": 1, "temp": 1, "strategy": "simple"},
+  {"n": 20, "r": 3, "temp": 1, "strategy": "simple"},
+  {"n": 10, "r": 2, "temp": 0.75, "strategy": "simple"},
+  {"n": 20, "r": 1, "temp": 0.75, "strategy": "simple"}
+]
