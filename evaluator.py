@@ -51,30 +51,40 @@ def main() -> None:
     with open(_RESULTS_PATH, 'w') as write_file:
         write_file.write(_CSV_HEADER)
         for f in files:
+            # get full path of file
+            filepath = os.path.abspath(os.path.join(_TEST_DIR, f))
             lang = f.split(".")[-1]
             for p in perms:
-                print(f"running {f} with {p.__repr__()}")
-                cmd = f"{_CLIENT_PATH} --token {_CODEX_TOKEN} --file {f} --output /tmp/deleteme --lang {lang} --retries {p.r} --n {p.n} --temp {p.temp} --strategy {p.strategy}"
+                print(f"running {filepath} with {p.__repr__()}")
+                cmd = f"{_CLIENT_PATH} --token {_CODEX_TOKEN} --file {filepath} --output /tmp/deleteme --lang {lang} --retries {p.r} --n {p.n} --temp {p.temp} --strategy {p.strategy}"
                 cmd_ = cmd.split()
                 sp = subprocess.Popen(
                     cmd_, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                out, err = sp.communicate()
+                status = sp.wait()
 
-                if 'Rate limited' in err.decode("utf-8"):
+                out = sp.stdout.read().decode("utf-8")
+                err = sp.stdout.read().decode("utf-8")
+
+                if 'Rate limited' in err:
                     print(f"got rate limited. sleeping")
                     time.sleep(70)
                     sp = subprocess.Popen(
                         cmd_, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                    out, err = sp.communicate()
+                    status = sp.wait()
+                    out = sp.stdout.read().decode("utf-8")
+                    err = sp.stdout.read().decode("utf-8")
                     if 'Rate limited' in err.decode("utf-8"):
                         print(f"got rate limited again!!!!")
                         time.sleep(70)
 
-                status = sp.returncode
                 if status == 0:
-                    comp = out.decode("utf-8").split("completed:\n")[-1]
+                    comp = out.split("completed:\n")[-1]
                     print(f"got completion: {comp}")
-                print(f"status: {status}")
+                    print(f"status: {status}")
+
+                if status != 0:
+                    # print stderr
+                    print()
 
                 row = f'{f},{lang},{p.strategy},{p.r},{p.n},{p.temp},{status}\n'
                 write_file.write(row)
