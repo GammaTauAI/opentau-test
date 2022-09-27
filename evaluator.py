@@ -19,6 +19,10 @@ if len(sys.argv) == 6:
     _SAVE_DIR = sys.argv[5]
 else:
     _SAVE_DIR = '/tmp/deleteme'
+    # create the directory if it doesn't exist
+    if not os.path.exists(_SAVE_DIR):
+        os.makedirs(_SAVE_DIR)
+
 _CODEX_TOKEN = os.environ['OPENAI_API_KEY']
 _CSV_HEADER = f'file,language,strategy,retries,num_comp,temp,status\n'
 
@@ -49,7 +53,7 @@ def main() -> None:
 
     with open(_PERM_JSON) as f:
         perms = [Permutation.deserialize(i) for i in json.load(f)]
-    
+
     with open(_RESULTS_PATH, 'w') as write_file:
         write_file.write(_CSV_HEADER)
         for f in files:
