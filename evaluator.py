@@ -3,7 +3,8 @@ import time
 import sys
 import json
 import subprocess
-from typing import Dict
+
+from typing import Dict, Type, TypeVar
 
 
 if len(sys.argv) != 5 or len(sys.argv) != 6:
@@ -30,6 +31,7 @@ if _CODEX_TOKEN is None:
     print("please set OPENAI_API_KEY env var")
     sys.exit(1)
 
+T = TypeVar('T', bound='Permutation')
 
 class Permutation:
     def __init__(self, n: int, r: int, temp: float, strategy: str) -> None:
@@ -38,9 +40,9 @@ class Permutation:
         self.temp = temp
         self.strategy = strategy
 
-    @staticmethod
-    def deserialize(s: Dict):
-        return Permutation(**s)
+    @classmethod
+    def deserialize(cls: Type[T], s: Dict) -> T:
+        return cls(**s)
 
     def __repr__(self):
         return f"Permutation(n={self.n}, r={self.r}, temp={self.temp}, strategy={self.strategy})"
