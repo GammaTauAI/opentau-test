@@ -31,7 +31,9 @@ if _CODEX_TOKEN is None:
     print("please set OPENAI_API_KEY env var")
     sys.exit(1)
 
+
 T = TypeVar('T', bound='Permutation')
+
 
 class Permutation:
     def __init__(self, n: int, r: int, temp: float, strategy: str) -> None:
@@ -100,17 +102,3 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
-
-
-# 1. get the path of the files to test from argv[1]
-
-# 2. get all files at the path
-
-# 3. get the path of the perm from argv[2]
-
-# 4. read the perms in the path
-
-# 5. for each file, for each perm, run it, store results
-#    - you know if it typechecked, if there is a completed file at the output
-
-# 6. output csv file nguage,strategy,retries,num_comp,result
