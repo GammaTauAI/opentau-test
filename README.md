@@ -1,4 +1,5 @@
-# test artifact repo for codex-types
-Main repo: https://github.com/cassanof/codex-types
+# Test Artifact Repository for OpenTau
+
+Main repository: https://github.com/GammaTauAI/opentau
 
 Took a subset of files from here: https://github.com/everthis/leetcode-js
