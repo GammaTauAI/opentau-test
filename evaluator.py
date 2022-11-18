@@ -6,6 +6,10 @@ import subprocess
 
 from typing import Dict, Type, TypeVar
 
+# TODO:
+# - add incoder support
+# - add built-in typescript type-inf support
+
 
 if len(sys.argv) > 6 or len(sys.argv) < 5:
     print(
