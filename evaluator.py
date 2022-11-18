@@ -120,6 +120,13 @@ def main() -> None:
                 print(f"writing row: {row}")
                 write_file.write(row)
 
+                # remove all /tmp/codex-*-* files
+                cmd = "rm -rf /tmp/codex-*-*"
+                cmd_ = cmd.split()
+                sp = subprocess.Popen(
+                    cmd_, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                status = sp.wait()
+
 
 if __name__ == '__main__':
     main()
