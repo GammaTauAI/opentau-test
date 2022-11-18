@@ -30,6 +30,7 @@ else:
 
 _CODEX_TOKEN = os.environ['CODEX_TOKEN']
 _CSV_HEADER = f'file,model,language,strategy,retries,num_comp,temp,status,quality\n'
+_STOP_AT = 30  # we get a max of 30 type-checkable comps
 
 if _CODEX_TOKEN is None:
     print("please set CODEX_TOKEN env var")
@@ -75,7 +76,7 @@ def main() -> None:
                 dirname = f"{f}_perm_{i}"
                 outdir = os.path.join(_SAVE_DIR, dirname)
                 print(f"running {filepath} with {p.__repr__()}")
-                cmd = f"{_CLIENT_PATH} -t {_CODEX_TOKEN} --file {filepath} --output {outdir} --lang {lang} --retries {p.r} --n {p.n} --temp {p.temp} --strategy {p.strategy}"
+                cmd = f"{_CLIENT_PATH} -t {_CODEX_TOKEN} --file {filepath} --output {outdir} --lang {lang} --retries {p.r} --n {p.n} --temp {p.temp} --strategy {p.strategy} --stop-at {_STOP_AT}"
                 cmd_ = cmd.split()
                 sp = subprocess.Popen(
                     cmd_, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
