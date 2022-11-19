@@ -1,7 +1,4 @@
-const countSubarrays: (nums: number[], k: number) => number = function (
-    nums,
-    k
-) {
+const countSubarrays: (array: number[], k: number) => void = function (nums, k) {
     let sum: number = 0;
     let res: number = 0;
     for (let i = 0, j = 0, n = nums.length; i < n; i++) {

@@ -1,4 +1,4 @@
-const isPrefixString: (_:string, words:string[])=>boolean = function (s, words) {
+const isPrefixString: (myString: string, words: string[]) => boolean = function (s, words) {
     let tmp: string = "";
     for (let w of words) {
         tmp += w;

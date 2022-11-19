@@ -1,4 +1,4 @@
-const findMaxForm: (strs: Array<string>, m: number, n: number) => number = function (strs, m, n) {
+const findMaxForm: (_strs: string[],_m: number, _n:number) => number = function (strs, m, n) {
     const memo: number[][] = Array.from(new Array(m + 1), () => new Array(n + 1).fill(0));
     let numZeroes: number;
     let numOnes: number;

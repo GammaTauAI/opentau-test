@@ -1,5 +1,5 @@
-const highestPeak: (isWater: Array<Array<number>>) => Array<Array<number>> = function (isWater) {
-    let q: Array<[number, number, number]> = [];
+const highestPeak: (isWater: number[][]) => number[][] = function (isWater) {
+    let q: number[][] = [];
     const visited: Set<string> = new Set();
     const m: number = isWater.length, n: number = isWater[0].length;
     for (let i = 0; i < m; i++) {
@@ -10,8 +10,8 @@ const highestPeak: (isWater: Array<Array<number>>) => Array<Array<number>> = fun
             }
         }
     }
-    const res: Array<Array<number>> = Array.from({ length: m }, () => Array(n).fill(0));
-    const dirs: Array<[number, number]> = [
+    const res: number[][] = Array.from({ length: m }, () => Array(n).fill(0));
+    const dirs: number[][] = [
         [-1, 0],
         [1, 0],
         [0, 1],
@@ -19,11 +19,11 @@ const highestPeak: (isWater: Array<Array<number>>) => Array<Array<number>> = fun
     ];
     while (q.length) {
         const size: number = q.length;
-        const next: Array<[number, number, number]> = [];
+        const next: number[][] = [];
         // Array.shift time complexity: O(n)
         for (let i = 0; i < size; i++) {
-            const cur: [number, number, number] = q[i];
-            const [row, col, val]: [number, number, number] = cur;
+            const cur: number[] = q[i];
+            const [row, col, val]: number[] = cur;
             for (let dir of dirs) {
                 const newRow: number = row + dir[0], newCol: number = col + dir[1];
                 const key: string = `${newRow},${newCol}`;

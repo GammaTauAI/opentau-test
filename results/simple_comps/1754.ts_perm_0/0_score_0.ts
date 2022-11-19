@@ -1,4 +1,5 @@
-const getMaxLen: (nums: number[]) => number = function (nums) {
+const getMaxLen: (arr: number[]) => number
+= function (nums) {
     let res: number = 0, zeroIdx: number = -1, negIdx: number = -1, count: number = 0;
     for (let i = 0, len = nums.length; i < len; i++) {
         if (nums[i] < 0) {

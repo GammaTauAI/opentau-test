@@ -1,13 +1,12 @@
-const minimumMoves: (grid: number[][]) => number =
-    function (grid) {
+const minimumMoves: (grid: number[][]) => number = function (grid) {
     const n: number = grid.length;
     const start: string = [0, 0, 0, 1].join(",");
     const end: string = [n - 1, n - 2, n - 1, n - 1].join(",");
-    let curr_level: Set<string>  = new Set([start]);
+    let curr_level: Set<string> = new Set([start]);
     let moves: number = 0;
-    const visited: Set<string>  = new Set();
+    const visited: Set<string> = new Set();
     while (curr_level.size) {
-        const next_level: Set<string>  = new Set();
+        const next_level: Set<string> = new Set();
         for (let pos of curr_level) {
             visited.add(pos);
             let [r1, c1, r2, c2]: number[] = pos.split(",").map((e) => +e);

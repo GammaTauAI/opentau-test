@@ -1,13 +1,7 @@
-const sortTransformedArray: (nums: number[], a: number, b: number, c: number) => number[] = function (
-    nums,
-    a,
-    b,
-    c
-) {
+const sortTransformedArray: (nums: number[], a: number, b: number, c: number) => number[] = function (nums, a, b, c) {
     const n: number = nums.length;
     const sorted: number[] = new Array(n);
-    let i: number = 0,
-        j: number = n - 1;
+    let i: number = 0, j: number = n - 1;
     let index: number = a >= 0 ? n - 1 : 0;
     while (i <= j) {
         if (a >= 0) {

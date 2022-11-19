@@ -1,4 +1,4 @@
-const rob: (arg0: number[]) => {} = function (nums) {
+const rob: ((nums: number[]) => number) = function (nums) {
     if (nums.length === 0)
         return 0;
     if (nums.length < 3)

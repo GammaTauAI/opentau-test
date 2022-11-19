@@ -1,5 +1,5 @@
-const hash: { [key: string]: number } = {};
-const tribonacci: ((n: number) => number) = function (n) {
+const hash: { [id: number]: number } = {};
+const tribonacci: (n: number) => number = function (n) {
     if (n === 0)
         return 0;
     if (n === 2 || n === 1)

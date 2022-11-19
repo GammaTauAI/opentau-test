@@ -1,4 +1,4 @@
-const hash: Record<number, number> = {};
+const hash: {} = {};
 const tribonacci: (n: number) => number = function (n) {
     if (n === 0)
         return 0;

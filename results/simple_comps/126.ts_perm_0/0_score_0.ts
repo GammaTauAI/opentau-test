@@ -1,8 +1,8 @@
 const isAnagram: (s: string, t: string) => boolean = function (s, t) {
     if (s.length !== t.length)
         return false;
-    const sh: Object = strHash(s);
-    const th: Object = strHash(t);
+    const sh: { [key: string]: number } = strHash(s);
+    const th: { [key: string]: number } = strHash(t);
     for (let key in sh) {
         if (sh.hasOwnProperty(key) && sh[key] !== th[key]) {
             return false;
@@ -10,8 +10,8 @@ const isAnagram: (s: string, t: string) => boolean = function (s, t) {
     }
     return true;
 };
-function strHash(str: string): Object {
-    let res: Object = {};
+function strHash(str: string): { [key: string]: number } {
+    let res: { [key: string]: number } = {};
     for (let i = 0; i < str.length; i++) {
         if (res.hasOwnProperty(str[i])) {
             res[str[i]] += 1;

@@ -1,5 +1,7 @@
-const distinctNames: (ideas: string[]) => number = function (ideas) {
-    let smap: Set<string>[] = Array.from({ length: 26 }, (_) => new Set()), ans: number = 0;
+const distinctNames: (ideas: string[]) => number
+= function (ideas) {
+    let smap: Set<string>[] = Array.from({ length: 26 }, (_) => new Set()),
+        ans: number = 0;
     for (let i = 0; i < ideas.length; i++) {
         let word: string = ideas[i];
         smap[word.charCodeAt(0) - 97].add(word.slice(1));

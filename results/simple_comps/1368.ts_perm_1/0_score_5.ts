@@ -1,4 +1,4 @@
-const findNthDigit: (number) => string = function (n) {
+const findNthDigit: any = function (n) {
     let start: number = 1;
     let len: number = 1;
     let base: number = 9;

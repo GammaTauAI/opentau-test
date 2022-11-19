@@ -4,7 +4,7 @@ const hasPath: (maze: number[][], start: number[], destination: number[]) => boo
     const queue: number[][] = [];
     const visited: boolean[][] = Array.from({ length: m }, () => new Array(n).fill(false));
     queue.push(start);
-    const dirs: [number, number][] = [
+    const dirs: number[][] = [
         [-1, 0],
         [0, -1],
         [0, 1],

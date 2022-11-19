@@ -1,7 +1,7 @@
-const minimumTimeRequired: (jobs: number[], k: number) => number = function (jobs, k) {
+const minimumTimeRequired: (jobs : number[], k: number) => number = function (jobs, k) {
     const workers: number[] = Array(k).fill(0);
     let res: number = Infinity;
-    const n: number = jobs.length;
+    const n: number  = jobs.length;
     dfs(0);
     return res;
     function dfs(idx: number): void {

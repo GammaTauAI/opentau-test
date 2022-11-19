@@ -1,8 +1,9 @@
-const findMedianSortedArrays: (nums1: number[], nums2: number[],) => number = function (nums1, nums2) {
-    if (nums1.length > nums2.length)
-        return findMedianSortedArrays(nums2, nums1);
-    const m: number = nums1.length, n: number = nums2.length;
-    let low: number = 0, high: number = m;
+const findMedianSortedArrays: ((nums1: number [], nums2: number []) => number) =
+    function (nums1, nums2) {
+        if (nums1.length > nums2.length)
+            return findMedianSortedArrays(nums2, nums1);
+        const m: number = nums1.length, n: number = nums2.length;
+        let low: number = 0, high: number = m;
     while (low <= high) {
         const px: number = Math.floor((low + high) / 2);
         const py: number = Math.floor((m + n + 1) / 2) - px;

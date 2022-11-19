@@ -1,5 +1,5 @@
-const minRefuelStops: (target: number, startFuel: number, stations: Array<Array<number>>) => number = function (target, startFuel, stations) {
-    const dp: Array<number> = Array(stations.length + 1).fill(0);
+const minRefuelStops: (target: number, startFuel: number, stations: [number, number][]) => number = function (target, startFuel, stations) {
+    const dp: number[] = Array(stations.length + 1).fill(0);
     dp[0] = startFuel;
     for (let i = 0; i < stations.length; ++i) {
         for (let t = i; t >= 0 && dp[t] >= stations[i][0]; --t) {

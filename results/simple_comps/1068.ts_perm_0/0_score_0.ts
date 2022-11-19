@@ -1,4 +1,4 @@
-const rotate: (matrix: number[][]) => void = function (matrix) {
+const rotate: ((matrix: number[][]) => void) = function (matrix) {
     let s: number = 0, e: number = matrix.length - 1;
     while (s < e) {
         let temp: number[] = matrix[s];

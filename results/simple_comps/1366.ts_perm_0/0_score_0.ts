@@ -1,5 +1,5 @@
-const carPooling: (trips: number[][], capacity: number) => boolean = function (trips, capacity) {
-    const arr: number[] = Array(1001).fill(0);
+const carPooling: (num: number[][], cap: number) => boolean = function (trips, capacity) {
+    const arr: (number | undefined)[] = Array(1001).fill(0);
     for (const [num, s, e] of trips) {
         arr[s] += num;
         arr[e] -= num;

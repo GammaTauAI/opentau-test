@@ -1,7 +1,6 @@
-const hash: {
-    [key: number]: number;
-} = {};
-const tribonacci: (n: number) => number = function (n) {
+const hash: { [signature: number]: number // TODO... challenge
+ } = {};
+const tribonacci: (signature: number) => number = function (n) {
     if (n === 0)
         return 0;
     if (n === 2 || n === 1)

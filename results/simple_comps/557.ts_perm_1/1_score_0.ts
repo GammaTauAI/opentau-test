@@ -1,4 +1,4 @@
-const checkPossibility: (nums: Array<number>) => boolean = function (nums) {
+function checkPossibility(nums: number[]): boolean {
     let count: number = 0;
     let idx: number;
     if (nums.length === 1)

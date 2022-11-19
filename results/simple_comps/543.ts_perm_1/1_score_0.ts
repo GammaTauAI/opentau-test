@@ -1,5 +1,5 @@
-const maxRepOpt1: (text: string) => number = function (text) {
-    const count: { [k in string]: number } = [...text].reduce((a, c) => {
+const maxRepOpt1: (text:string) => number = function (text) {
+    const count: {[k:string]: number} = [...text].reduce((a, c) => {
         a[c] = a[c] || 0;
         a[c]++;
         return a;

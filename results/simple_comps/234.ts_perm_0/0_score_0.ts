@@ -1,4 +1,4 @@
-const findIntegers: (num: number) => number = function (num) {
+const findIntegers: (num: number) => void = function (num) {
     const binary: string = num.toString(2);
     const fibonacci: number[] = [1, 2];
     for (let i = 2; i < binary.length; ++i) {

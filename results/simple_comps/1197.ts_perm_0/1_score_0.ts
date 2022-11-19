@@ -1,4 +1,4 @@
-const removeDuplicates: (s: string) => string = function (S) {
+const removeDuplicates: (S: string) => string = function (S) {
     const queue: string[] = [];
     for (let i = 0; i < S.length; i++) {
         if (queue.length > 0 && queue[queue.length - 1] === S[i]) {

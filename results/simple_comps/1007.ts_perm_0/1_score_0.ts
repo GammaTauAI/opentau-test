@@ -1,5 +1,5 @@
-const twoSum: (nums: number[], target: number) => [number, number] = function (nums, target) {
-    const myObject: Object = {};
+const twoSum: (nums: number[], target: number) => number[] = function (nums, target) {
+    const myObject: { [n: number]: number; } = {};
     for (let i = 0; i < nums.length; i++) {
         const complement: number = target - nums[i];
         if (myObject.hasOwnProperty(complement)) {

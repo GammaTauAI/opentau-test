@@ -1,5 +1,4 @@
-const minimumMoves: (grid: number[][]) => number =
-    function (grid) {
+const minimumMoves: (grid: number[][]) => number = function (grid) {
     const n: number = grid.length;
     const start: string = [0, 0, 0, 1].join(",");
     const end: string = [n - 1, n - 2, n - 1, n - 1].join(",");

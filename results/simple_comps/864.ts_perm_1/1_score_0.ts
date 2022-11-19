@@ -1,4 +1,4 @@
-const maxSubArray: (nums: number[]) => number = function (nums) {
+const maxSubArray: ((nums: number[]) => number) = function (nums) {
     return helper(nums, 0, nums.length - 1);
 };
 function helper(arr: number[], l: number, r: number): number {

@@ -1,9 +1,6 @@
 const rotateGrid: (grid: number[][], k: number) => number[][] = function (grid, k) {
     const m: number = grid.length, n: number = grid[0].length;
-    let top: number = 0,
-    left: number = 0,
-    right: number = n - 1,
-    bottom: number = m - 1;
+    let top: number = 0, left: number = 0, right: number = n - 1, bottom: number = m - 1;
     while (top < bottom && left < right) {
         const num: number = (right - left + 1) * 2 + (bottom - top + 1) * 2 - 4;
         let rem: number = k % num;

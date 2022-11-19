@@ -1,5 +1,5 @@
-const removeDuplicates: (string) => string = function (S) {
-    const queue: string[] = [];
+const removeDuplicates: Function = function (S) {
+    const queue: Array<String> = [];
     for (let i = 0; i < S.length; i++) {
         if (queue.length > 0 && queue[queue.length - 1] === S[i]) {
             queue.pop();

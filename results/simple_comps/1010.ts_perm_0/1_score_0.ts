@@ -1,4 +1,4 @@
-const isSubsequence: ((s: string, t: string) => boolean) = function (s, t) {
+const isSubsequence: (s: string, t: string) => boolean = function (s, t) {
     const sl: number = s.length;
     const tl: number = t.length;
     if (sl > tl)

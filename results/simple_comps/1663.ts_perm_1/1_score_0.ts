@@ -1,8 +1,9 @@
-const maxRepeating: (sequence: string, word: string) => number = function (sequence, word) {
+const maxRepeating: (sequence: string, word: string) => number
+    = function (sequence, word) {
     const s: number = sequence.length, w: number = word.length;
     const max_repeat: number = (s / w) >> 0;
     const failure: number[] = Array(w * max_repeat + 1).fill(0);
-    let repeat_words: string = word.repeat(max_repeat) + "$";
+    const repeat_words: string = word.repeat(max_repeat) + "$";
     let result: number = 0, j: number = 0;
     for (let i = 1, hi = repeat_words.length; i < hi; i++) {
         while (j > 0 && repeat_words[j] !== repeat_words[i])

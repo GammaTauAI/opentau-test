@@ -1,4 +1,4 @@
-const findMaxConsecutiveOnes: (nums: number[]) => number = function (nums) {
+const findMaxConsecutiveOnes: (nums : number[]) => number = function (nums) {
     let max: number = 0, k: number = 1;
     const zeroIndex: number[] = [];
     for (let l = 0, h = 0; h < nums.length; h++) {

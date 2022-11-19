@@ -1,4 +1,5 @@
-const numSubmatrixSumTarget: (matrix: number[][], target: number) => number = function (matrix, target) {
+const numSubmatrixSumTarget: (matrix: number[][], target: number) => number = 
+function (matrix, target) {
     let a: number[][] = matrix;
     let n: number = a.length, m: number = a[0].length;
     const cum: number[][] = Array.from({ length: n + 1 }, () => new Array(m + 1).fill(0));

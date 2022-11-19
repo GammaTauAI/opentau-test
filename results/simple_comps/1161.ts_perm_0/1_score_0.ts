@@ -1,6 +1,11 @@
-const shortestSubarray: (nums: number[], k: number) => number = function (nums, k) {
-    const q: number[] = [], n: number = nums.length;
-    let res: number = Infinity, sum: number = 0;
+const shortestSubarray: (nums: number[], k: number) => number = function (
+    nums,
+    k,
+) {
+    const q: number[] = [],
+        n: number = nums.length;
+    let res: number = Infinity,
+        sum: number = 0;
     const prefix: number[] = [];
     for (let i = 0; i < n; i++) {
         sum += nums[i];

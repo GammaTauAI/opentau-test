@@ -1,5 +1,5 @@
-const singleNumber: { (nums: number[]): number[] } = function (nums) {
-    const hash: { [num: number]: number } = {};
+const singleNumber: (nums: number[]) => number[] = function (nums) {
+    const hash: { [n: number]: number } = {};
     nums.forEach((el, idx) => {
         if (hash.hasOwnProperty(el)) {
             hash[el] += 1;

@@ -1,10 +1,10 @@
-const validIPAddress: ((IP: string) => string) = function (IP) {
+const validIPAddress: (IP: string) => string = function (IP) {
     if (IP.indexOf(".") > 0)
         return validIPv4(IP) ? "IPv4" : "Neither";
     else
         return validIPv6(IP) ? "IPv6" : "Neither";
 };
-const validIPv4: ((IP: string) => boolean) = function (IP) {
+const validIPv4: (IP: string) => boolean = function (IP) {
     const strs: string[] = IP.split(".");
     if (strs.length !== 4)
         return false;
@@ -20,7 +20,7 @@ const validIPv4: ((IP: string) => boolean) = function (IP) {
     }
     return true;
 };
-const validIPv6: ((IP: string) => boolean) = function (IP) {
+const validIPv6: (IP: string) => boolean = function (IP) {
     const strs: string[] = IP.split(":");
     if (strs.length !== 8)
         return false;

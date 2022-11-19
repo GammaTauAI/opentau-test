@@ -1,4 +1,4 @@
-const sortTransformedArray: (nums: number[], a: number, b: number, c: number) => number[] = function (nums, a, b, c) {
+const sortTransformedArray: (numbers: number[], a: number, b: number, c: number) => number[] = function (nums, a, b, c) {
     const n: number = nums.length;
     const sorted: number[] = new Array(n);
     let i: number = 0, j: number = n - 1;

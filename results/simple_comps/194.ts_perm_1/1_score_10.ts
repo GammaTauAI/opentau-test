@@ -1,4 +1,4 @@
-const rotateGrid: any = function (grid, k) {
+const rotateGrid: Function = function (grid, k) {
     const m: number = grid.length, n: number = grid[0].length;
     let top: number = 0, left: number = 0, right: number = n - 1, bottom: number = m - 1;
     while (top < bottom && left < right) {

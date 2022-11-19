@@ -1,5 +1,5 @@
 class BitSet {
-    arr: number[];
+    arr: Array<number>;
     constructor(n) {
         this.arr = Array(n).fill(0);
     }
@@ -10,7 +10,7 @@ class BitSet {
         return this.arr[idx];
     }
 }
-const oddCells: (n: number, m: number, indices: number[][]) => number = function (n, m, indices) {
+const oddCells: (n: number, m: number, indices: Array<Array<number>>) => number = function (n, m, indices) {
     const oddRows: BitSet = new BitSet(n), oddCols: BitSet = new BitSet(m);
     let cntRow: number = 0, cntCol: number = 0;
     for (let idx of indices) {

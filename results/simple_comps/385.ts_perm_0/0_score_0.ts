@@ -1,5 +1,5 @@
 const mincostTickets: (days: number[], costs: number[]) => number = function (days, costs) {
-    const last7: number[][] = [], last30: number[][] = [];
+    const last7: [number, number][] = [], last30: [number, number][] = [];
     let res: number = 0;
     for (let d of days) {
         while (last7.length && last7[0][0] + 7 <= d)
