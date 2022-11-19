@@ -102,7 +102,7 @@ def main() -> None:
                     f"({iteration}/{max_iterations}): running {filepath} with {p.__repr__()}")
                 cmd = f"{_CLIENT_PATH} -t {_CODEX_TOKEN} --file {filepath} --output {outdir} --lang {lang} --retries {p.r} --n {p.n} --temp {p.temp} --strategy {p.strategy} --stop-at {_STOP_AT}{model_cmd}"
                 cmd_ = cmd.split()
-                sp = run_with_timeout(cmd_, 60 * 5)  # 5 minutes
+                sp = run_with_timeout(cmd_, 60 * 15)  # 15 minutes
                 status = sp.wait()
 
                 out = sp.stdout.read().decode("utf-8")
@@ -111,7 +111,7 @@ def main() -> None:
                 if 'Rate limited' in err:
                     print(f"got rate limited. sleeping")
                     time.sleep(120)
-                    sp = run_with_timeout(cmd_, 60 * 5)  # 5 minutes
+                    sp = run_with_timeout(cmd_, 60 * 15)  # 15 minutes
                     status = sp.wait()
                     out = sp.stdout.read().decode("utf-8")
                     err = sp.stderr.read().decode("utf-8")
