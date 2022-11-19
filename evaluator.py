@@ -1,10 +1,11 @@
 import os
 import time
 import sys
+import threading
 import json
 import subprocess
 
-from typing import Dict, Type, TypeVar
+from typing import Dict, List, Type, TypeVar
 
 # TODO:
 # - add incoder support
@@ -57,6 +58,20 @@ class Permutation:
         return f"Permutation(n={self.n}, r={self.r}, temp={self.temp}, strategy={self.strategy}, model={self.model})"
 
 
+def run_with_timeout(cmd: List[str], timeout_sec: int) -> subprocess.Popen:
+    # uses Popen to run a command with a timeout
+    proc = subprocess.Popen(
+        cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    # poll every 0.25 seconds
+    for _ in range(timeout_sec * 4):
+        time.sleep(0.25)
+        if proc.poll() is not None:
+            return proc
+    # kill the process
+    proc.kill()
+    return proc
+
+
 def main() -> None:
     d = os.fsencode(_TEST_DIR)
 
@@ -87,8 +102,7 @@ def main() -> None:
                     f"({iteration}/{max_iterations}): running {filepath} with {p.__repr__()}")
                 cmd = f"{_CLIENT_PATH} -t {_CODEX_TOKEN} --file {filepath} --output {outdir} --lang {lang} --retries {p.r} --n {p.n} --temp {p.temp} --strategy {p.strategy} --stop-at {_STOP_AT}{model_cmd}"
                 cmd_ = cmd.split()
-                sp = subprocess.Popen(
-                    cmd_, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                sp = run_with_timeout(cmd_, 60 * 5)  # 5 minutes
                 status = sp.wait()
 
                 out = sp.stdout.read().decode("utf-8")
@@ -97,8 +111,7 @@ def main() -> None:
                 if 'Rate limited' in err:
                     print(f"got rate limited. sleeping")
                     time.sleep(120)
-                    sp = subprocess.Popen(
-                        cmd_, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                    sp = run_with_timeout(cmd_, 60 * 5)  # 5 minutes
                     status = sp.wait()
                     out = sp.stdout.read().decode("utf-8")
                     err = sp.stderr.read().decode("utf-8")
