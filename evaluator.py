@@ -116,7 +116,7 @@ def main() -> None:
                     files = os.listdir(outdir)
                     # if we sort the files by name, the first one is the best
                     files.sort()
-                    quality = files[0].split("_")[0]
+                    quality = files[0].split("_")[-1].split(".")[0]
 
                 if status != 0:
                     # print stderr
