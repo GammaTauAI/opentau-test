@@ -67,6 +67,8 @@ def main() -> None:
 
     with open(_RESULTS_PATH, 'w') as write_file:
         write_file.write(_CSV_HEADER)
+        iteration = 1
+        max_iterations = len(files) * len(perms)
         for f in files:
             # get full path of file
             filepath = os.path.abspath(os.path.join(_TEST_DIR, f))
@@ -75,7 +77,8 @@ def main() -> None:
             for i, p in enumerate(perms):
                 dirname = f"{f}_perm_{i}"
                 outdir = os.path.join(_SAVE_DIR, dirname)
-                print(f"running {filepath} with {p.__repr__()}")
+                print(
+                    f"({iteration}/{max_iterations}): running {filepath} with {p.__repr__()}")
                 cmd = f"{_CLIENT_PATH} -t {_CODEX_TOKEN} --file {filepath} --output {outdir} --lang {lang} --retries {p.r} --n {p.n} --temp {p.temp} --strategy {p.strategy} --stop-at {_STOP_AT}"
                 cmd_ = cmd.split()
                 sp = subprocess.Popen(
@@ -126,6 +129,7 @@ def main() -> None:
                 sp = subprocess.Popen(
                     cmd_, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 status = sp.wait()
+                iteration += 1
 
 
 if __name__ == '__main__':
