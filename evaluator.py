@@ -137,7 +137,13 @@ def main() -> None:
                     print(f"stdout: {out}")
                     print(f"status: {status}")
 
-                status_str = "success" if status == 0 else "failure"
+                if status == 0:
+                    status_str = "success"
+                elif status == -9:
+                    status_str = "timeout"
+                else:
+                    status_str = "failure"
+
                 row = f'{f},{p.model},{lang},{p.strategy},{p.r},{p.n},{p.temp},{status_str},{quality}\n'
                 print(f"writing row: {row}")
                 write_file.write(row)
