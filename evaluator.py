@@ -77,9 +77,15 @@ def main() -> None:
             for i, p in enumerate(perms):
                 dirname = f"{f}_perm_{i}"
                 outdir = os.path.join(_SAVE_DIR, dirname)
+
+                model_cmd = ""  # default is codex, do nothing extra
+                if p.model == 'incoder':
+                    # on incoder, we point to our http server
+                    model_cmd = " --endpoint http://127.0.0.1:8000 --disable-rate-limit"
+
                 print(
                     f"({iteration}/{max_iterations}): running {filepath} with {p.__repr__()}")
-                cmd = f"{_CLIENT_PATH} -t {_CODEX_TOKEN} --file {filepath} --output {outdir} --lang {lang} --retries {p.r} --n {p.n} --temp {p.temp} --strategy {p.strategy} --stop-at {_STOP_AT}"
+                cmd = f"{_CLIENT_PATH} -t {_CODEX_TOKEN} --file {filepath} --output {outdir} --lang {lang} --retries {p.r} --n {p.n} --temp {p.temp} --strategy {p.strategy} --stop-at {_STOP_AT}{model_cmd}"
                 cmd_ = cmd.split()
                 sp = subprocess.Popen(
                     cmd_, stdout=subprocess.PIPE, stderr=subprocess.PIPE)

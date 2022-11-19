@@ -1,0 +1,5 @@
+[
+  { "n": 30, "r": 1, "temp": 1, "model": "incoder", "strategy": "simple" },
+  { "n": 30, "r": 1, "temp": 0.8, "model": "incoder", "strategy": "simple" },
+  { "n": 30, "r": 1, "temp": 0.6, "model": "incoder", "strategy": "simple" }
+]
