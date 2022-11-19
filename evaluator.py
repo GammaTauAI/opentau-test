@@ -93,7 +93,7 @@ def main() -> None:
                     status = sp.wait()
                     out = sp.stdout.read().decode("utf-8")
                     err = sp.stderr.read().decode("utf-8")
-                    if 'Rate limited' in err.decode("utf-8"):
+                    if 'Rate limited' in err:
                         print(f"got rate limited again!!!!")
                         time.sleep(120)
 
