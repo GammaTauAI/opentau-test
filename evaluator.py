@@ -121,14 +121,14 @@ def main() -> None:
                     out = sp.stdout.read().decode("utf-8")
                     err = sp.stderr.read().decode("utf-8")
 
-                    if 'Rate limited' in err:
+                    if 'Rate limited' in err or 'rate limit' in err:
                         print(f"got rate limited. sleeping")
                         time.sleep(120)
                         sp = run_with_timeout(cmd_, 60 * 15)  # 15 minutes
                         status = sp.wait()
                         out = sp.stdout.read().decode("utf-8")
                         err = sp.stderr.read().decode("utf-8")
-                        if 'Rate limited' in err:
+                        if 'Rate limited' in err or 'rate limit' in err:
                             print(f"got rate limited again!!!!")
                             time.sleep(120)
 
