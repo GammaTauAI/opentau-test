@@ -8,7 +8,6 @@ import subprocess
 from typing import Dict, List, Type, TypeVar
 
 # TODO:
-# - add incoder support
 # - add built-in typescript type-inf support
 
 
@@ -78,83 +77,96 @@ def main() -> None:
     files = [os.fsdecode(f) for f in os.listdir(d)]
 
     with open(_PERM_JSON) as f:
-        perms = [Permutation.deserialize(i) for i in json.load(f)]
+        # this looks like:
+        # {
+        #  "iters": 5,
+        #  "permutations": [
+        #   ...
+        #  ]
+        # }
+        j = json.load(f)
+        perms = [Permutation.deserialize(i) for i in j['permutations']]
+        iters = j['iters']
 
-    with open(_RESULTS_PATH, 'w') as write_file:
-        write_file.write(_CSV_HEADER)
-        iteration = 1
-        max_iterations = len(files) * len(perms)
-        for f in files:
-            # get full path of file
-            filepath = os.path.abspath(os.path.join(_TEST_DIR, f))
-            lang = f.split(".")[-1]
+    for it in range(iters):
+        # add the iter before the extension
+        RESULTS_PATH = _RESULTS_PATH.replace('.csv', f'_iter_{it}.csv')
+        print(f"#################### ITER {it} ####################")
+        with open(RESULTS_PATH, 'w') as write_file:
+            write_file.write(_CSV_HEADER)
+            iteration = 1
+            max_iterations = len(files) * len(perms)
+            for f in files:
+                # get full path of file
+                filepath = os.path.abspath(os.path.join(_TEST_DIR, f))
+                lang = f.split(".")[-1]
 
-            for i, p in enumerate(perms):
-                dirname = f"{f}_perm_{i}"
-                outdir = os.path.join(_SAVE_DIR, dirname)
+                for p_i, p in enumerate(perms):
+                    dirname = f"{f}_perm_{p_i}_iter_{it}"
+                    outdir = os.path.join(_SAVE_DIR, dirname)
 
-                model_cmd = ""  # default is codex, do nothing extra
-                if p.model == 'incoder':
-                    # on incoder, we point to our http server
-                    model_cmd = " --endpoint http://127.0.0.1:8000 --disable-rate-limit"
+                    model_cmd = ""  # default is codex, do nothing extra
+                    if p.model == 'incoder':
+                        # on incoder, we point to our http server
+                        model_cmd = " --endpoint http://127.0.0.1:8000 --disable-rate-limit"
 
-                print(
-                    f"({iteration}/{max_iterations}): running {filepath} with {p.__repr__()}")
-                cmd = f"{_CLIENT_PATH} -t {_CODEX_TOKEN} --file {filepath} --output {outdir} --lang {lang} --retries {p.r} --n {p.n} --temp {p.temp} --strategy {p.strategy} --stop-at {_STOP_AT}{model_cmd}"
-                cmd_ = cmd.split()
-                sp = run_with_timeout(cmd_, 60 * 15)  # 15 minutes
-                status = sp.wait()
-
-                out = sp.stdout.read().decode("utf-8")
-                err = sp.stderr.read().decode("utf-8")
-
-                if 'Rate limited' in err:
-                    print(f"got rate limited. sleeping")
-                    time.sleep(120)
+                    print(
+                        f"({iteration}/{max_iterations}): running {filepath} with {p.__repr__()}")
+                    cmd = f"{_CLIENT_PATH} -t {_CODEX_TOKEN} --file {filepath} --output {outdir} --lang {lang} --retries {p.r} --n {p.n} --temp {p.temp} --strategy {p.strategy} --stop-at {_STOP_AT}{model_cmd}"
+                    cmd_ = cmd.split()
                     sp = run_with_timeout(cmd_, 60 * 15)  # 15 minutes
                     status = sp.wait()
+
                     out = sp.stdout.read().decode("utf-8")
                     err = sp.stderr.read().decode("utf-8")
+
                     if 'Rate limited' in err:
-                        print(f"got rate limited again!!!!")
+                        print(f"got rate limited. sleeping")
                         time.sleep(120)
+                        sp = run_with_timeout(cmd_, 60 * 15)  # 15 minutes
+                        status = sp.wait()
+                        out = sp.stdout.read().decode("utf-8")
+                        err = sp.stderr.read().decode("utf-8")
+                        if 'Rate limited' in err:
+                            print(f"got rate limited again!!!!")
+                            time.sleep(120)
 
-                quality = "NA"
-                if status == 0:
-                    comp = out.split("completed:\n")[-1]
-                    print(f"got completion: {comp}")
-                    print(f"status: {status}")
-                    # we get the quality from the file names in the output dir
+                    quality = "NA"
+                    if status == 0:
+                        comp = out.split("completed:\n")[-1]
+                        print(f"got completion: {comp}")
+                        print(f"status: {status}")
+                        # we get the quality from the file names in the output dir
 
-                    files = os.listdir(outdir)
-                    # if we sort the files by name, the first one is the best
-                    files.sort()
-                    quality = files[0].split("_")[-1].split(".")[0]
+                        q_files = os.listdir(outdir)
+                        # if we sort the files by name, the first one is the best
+                        q_files.sort()
+                        quality = q_files[0].split("_")[-1].split(".")[0]
 
-                if status != 0:
-                    # print stderr
-                    print(f"stderr: {err}")
-                    print(f"stdout: {out}")
-                    print(f"status: {status}")
+                    if status != 0:
+                        # print stderr
+                        print(f"stderr: {err}")
+                        print(f"stdout: {out}")
+                        print(f"status: {status}")
 
-                if status == 0:
-                    status_str = "success"
-                elif status == -9:
-                    status_str = "timeout"
-                else:
-                    status_str = "failure"
+                    if status == 0:
+                        status_str = "success"
+                    elif status == -9:
+                        status_str = "timeout"
+                    else:
+                        status_str = "failure"
 
-                row = f'{f},{p.model},{lang},{p.strategy},{p.r},{p.n},{p.temp},{status_str},{quality}\n'
-                print(f"writing row: {row}")
-                write_file.write(row)
+                    row = f'{f},{p.model},{lang},{p.strategy},{p.r},{p.n},{p.temp},{status_str},{quality}\n'
+                    print(f"writing row: {row}")
+                    write_file.write(row)
 
-                # remove all /tmp/codex-*-* files
-                cmd = "rm -rf /tmp/codex-*-*"
-                cmd_ = cmd.split()
-                sp = subprocess.Popen(
-                    cmd_, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                status = sp.wait()
-                iteration += 1
+                    # remove all /tmp/codex-*-* files
+                    cmd = "rm -rf /tmp/codex-*-*"
+                    cmd_ = cmd.split()
+                    sp = subprocess.Popen(
+                        cmd_, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                    status = sp.wait()
+                    iteration += 1
 
 
 if __name__ == '__main__':

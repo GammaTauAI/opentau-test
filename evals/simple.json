@@ -1,4 +1,7 @@
-[
-  { "n": 5, "r": 2, "temp": 1, "model": "codex", "strategy": "simple" },
-  { "n": 10, "r": 1, "temp": 0.8, "model": "codex", "strategy": "simple" }
-]
+{
+  "iters": 3,
+  "permutations": [
+    { "n": 5, "r": 2, "temp": 1, "model": "codex", "strategy": "simple" },
+    { "n": 10, "r": 1, "temp": 0.8, "model": "codex", "strategy": "simple" }
+  ]
+}
