@@ -91,7 +91,7 @@ def main() -> None:
     for it in range(iters):
         # add the iter before the extension
         RESULTS_PATH = _RESULTS_PATH.replace('.csv', f'_iter_{it}.csv')
-        print(f"#################### ITER {it} ####################")
+        print(f"#################### ITER ({it}/{iters-1}) ####################")
         with open(RESULTS_PATH, 'w') as write_file:
             write_file.write(_CSV_HEADER)
             iteration = 1
