@@ -1,5 +1,5 @@
 {
-  "iter": 3,
+  "iters": 3,
   "permutations": [
     { "n": 10, "r": 1, "temp": 1, "model": "incoder", "strategy": "tree" },
     { "n": 10, "r": 1, "temp": 0.8, "model": "incoder", "strategy": "tree" }
