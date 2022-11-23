@@ -9,6 +9,7 @@ from typing import Dict, List, Type, TypeVar
 
 # TODO:
 # - add built-in typescript type-inf support
+# - run tests with code with comments and without
 
 
 if len(sys.argv) > 6 or len(sys.argv) < 5:
