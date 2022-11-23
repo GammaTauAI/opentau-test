@@ -53,7 +53,7 @@ def make_bar_graph(filepath):
         x = []
         y = []
         keys_map = {}
-        labels = []
+        #  labels = []
         for key, value in results.items():
             ket_str_pre = "{}-{}".format(key[0], key[2])
             if ket_str_pre not in keys_map:
@@ -64,7 +64,7 @@ def make_bar_graph(filepath):
             ket_str = "{}-{}-{}".format(key[0], key[2], keys_map[ket_str_pre])
             x.append(ket_str)
             y.append(value[0])
-            labels.append("Average Quality: {}".format(value[1]))
+            #  labels.append("Average Quality: {}".format(value[1]))
 
         # create plot
         fig, ax = plt.subplots()
@@ -74,10 +74,10 @@ def make_bar_graph(filepath):
         ax.set_ylabel("Successes")
 
         # add labels
-        for rect, label in zip(ax.patches, labels):
-            height = rect.get_height()
-            ax.text(rect.get_x() + rect.get_width() / 2, height - 20, label,
-                    ha='center', va='bottom')
+        #  for rect, label in zip(ax.patches, labels):
+            #  height = rect.get_height()
+            #  ax.text(rect.get_x() + rect.get_width() / 2, height - 20, label,
+                    #  ha='center', va='bottom')
 
         fig.tight_layout()
         plt.savefig(OUTPUT_DIR + "successes_per_config.png")
