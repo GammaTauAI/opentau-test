@@ -64,7 +64,8 @@ def make_bar_graph(filepath):
             ket_str = "{}-{}-{}".format(key[0], key[2], keys_map[ket_str_pre])
             x.append(ket_str)
             y.append(value[0])
-            labels.append("Successes\n{}\nAvg Quality\n{}".format(value[0], value[1]))
+            labels.append(
+                "Successes\n{}\nAvg Quality\n{}".format(value[0], value[1]))
 
         # create plot
         fig, ax = plt.subplots()
