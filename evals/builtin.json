@@ -1,0 +1,6 @@
+{
+  "iters": 1,
+  "permutations": [
+    { "n": 0, "r": 0, "temp": 0, "model": "builtin", "strategy": "none" }
+  ]
+}
