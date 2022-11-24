@@ -219,9 +219,9 @@ def main() -> None:
                     else:
                         if lang == "ts":
                             err = ""
-                            out = ""
                             did_typecheck, output, score = builtin_typescript_infer(
                                 filepath)
+                            out = output
                             if did_typecheck:
                                 status = 0
                                 # write code to outdir
