@@ -62,7 +62,7 @@ class Permutation:
 # uses Popen to run a command with a timeout
 def run_with_timeout(cmd: List[str], timeout_sec: int) -> subprocess.Popen:
     proc = subprocess.Popen(cmd, stdout=subprocess.PIPE,
-                            stderr=subprocess.PIPE)
+                            stderr=subprocess.STDOUT, close_fds=True)
     try:
         proc.wait(timeout=timeout_sec)
     except subprocess.TimeoutExpired:
@@ -202,16 +202,13 @@ def main() -> None:
                         status = sp.returncode
 
                         out = sp.stdout.read().decode("utf-8")
-                        err = sp.stderr.read().decode("utf-8")
-
-                        if 'Rate limited' in err or 'rate limit' in err:
+                        if 'Rate limited' in out or 'rate limit' in out:
                             print(f"got rate limited. sleeping")
                             time.sleep(120)
                             sp = run_with_timeout(cmd_, 60 * 15)  # 15 minutes
                             status = sp.returncode
                             out = sp.stdout.read().decode("utf-8")
-                            err = sp.stderr.read().decode("utf-8")
-                            if 'Rate limited' in err or 'rate limit' in err:
+                            if 'Rate limited' in out or 'rate limit' in out:
                                 print(f"got rate limited again!!!!")
                                 time.sleep(120)
                     else:
@@ -245,7 +242,6 @@ def main() -> None:
 
                     if status != 0:
                         # print stderr
-                        print(f"stderr: {err}")
                         print(f"stdout: {out}")
                         print(f"status: {status}")
 
