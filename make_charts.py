@@ -70,22 +70,20 @@ def make_bar_graph(filepath):
             labels.append(
                 "Successes\n{}\nAvg Quality\n{}".format(value[0], value[1]))
 
-        # set max to max_y
-        plt.ylim(0, max_y)
-
         # create plot
         fig, ax = plt.subplots()
         ax.bar(x, y)
         ax.set_title("Successes per configuration")
         ax.set_xlabel("Config")
         ax.set_ylabel("Successes")
+        # make y axis got up to max_y
+        ax.set_ylim(0, max_y)
 
         # add labels
         for rect, label in zip(ax.patches, labels):
             height = rect.get_height()
-            max_height = max(y)
             # get the height of the label
-            ax.text(rect.get_x() + rect.get_width() / 2, height - (max_height / 4), label,
+            ax.text(rect.get_x() + rect.get_width() / 2, height - (max_y / 5.5), label,
                     ha='center', va='bottom')
 
         fig.tight_layout()
