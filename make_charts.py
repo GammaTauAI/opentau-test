@@ -77,7 +77,9 @@ def make_bar_graph(filepath):
         # add labels
         for rect, label in zip(ax.patches, labels):
             height = rect.get_height()
-            ax.text(rect.get_x() + rect.get_width() / 2, height - 20, label,
+            max_height = max(y)
+            # get the height of the label
+            ax.text(rect.get_x() + rect.get_width() / 2, height - (max_height / 4), label,
                     ha='center', va='bottom')
 
         fig.tight_layout()
