@@ -27,8 +27,10 @@ def make_bar_graph(filepath):
         next(reader)
         # dict of [config] -> [(amount of times it succeeded, qualities)]
         results = {}
+        file_set = set()
         for row in reader:
             file, model, lang, strategy, retries, num_comp, temp,  iters, successes, avg_quality = row
+            file_set.add(file)
             key = (model, lang, strategy, retries, num_comp, temp, iters)
             if key not in results:
                 if successes != "0":
@@ -39,6 +41,7 @@ def make_bar_graph(filepath):
                 results[key] = (results[key][0] + 1,
                                 results[key][1] + [float(avg_quality)])
 
+        max_y = len(file_set)
         # average out quals, round to 2 decimals
         for key in results:
             if len(results[key][1]) > 0:
@@ -66,6 +69,9 @@ def make_bar_graph(filepath):
             y.append(value[0])
             labels.append(
                 "Successes\n{}\nAvg Quality\n{}".format(value[0], value[1]))
+
+        # set max to max_y
+        plt.ylim(0, max_y)
 
         # create plot
         fig, ax = plt.subplots()
