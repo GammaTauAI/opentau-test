@@ -190,7 +190,7 @@ def main() -> None:
                     model_cmd = ""  # default is codex, do nothing extra
                     if p.model == 'incoder':
                         # on incoder, we point to our http server
-                        model_cmd = " --endpoint http://127.0.0.1:8000 --disable-rate-limit"
+                        model_cmd = " --endpoint http://127.0.0.1:8000 --disable-rate-limit --fallback"
 
                     print(
                         f"({iteration}/{max_iterations}): running {filepath} with {p.__repr__()}")
