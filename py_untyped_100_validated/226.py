@@ -1,39 +1,40 @@
-class Solution(object):
-    # def reverseWords(self, s):
-    #     """
-    #     :type s: str
-    #     :rtype: str
-    #     """
-    #     # O(n) and O(n) space
-    #     if len(s) == 0:
-    #         return s
-    #     temp = s.split(' ')
-    #     temp = [t for t in temp if len(t) > 0]
-    #     temp = reversed(temp)
-    #     return ' '.join(temp)
+class TwoSum(object):
 
-    def reverseWords(self, s):
-        # remove tail space
-        s = s.strip(' ')
-        array_s = []
-        last = ' '
-        # remove multiple spaces
-        for i in range(len(s)):
-            if s[i] != ' ':
-                array_s.append(s[i])
-            else:
-                if last != ' ':
-                    array_s.append(s[i])
-            last = s[i]
-        array_s = array_s[::-1]
-        ls, pos = len(array_s), 0
-        for i in range(ls + 1):
-            if i == ls or array_s[i] == ' ':
-                self.reverse(array_s, pos, i)
-                pos = i + 1
-        return ''.join(array_s)
+    def __init__(self):
+        """
+        initialize your data structure here
+        """
+        self.internal = []
+        self.dic = {}
 
-    def reverse(self, array_s, begin, end):
-        for i in range((end - begin) / 2):
-            array_s[begin + i], array_s[end - i - 1] = array_s[end - i - 1], array_s[begin + i]
+    def add(self, number):
+        """
+        Add the number to an internal data structure.
+        :rtype: nothing
+        """
+        self.internal.append(number)
+        if number in self.dic:
+            # more than once
+            self.dic[number] = True
+            return
+        # once
+        self.dic[number] = False
 
+    def find(self, value):
+        """
+        Find if there exists any pair of numbers which sum is equal to the value.
+        :type value: int
+        :rtype: bool
+        """
+        for v in self.internal:
+            if value - v in self.dic:
+                if v << 1 == value and not self.dic[v]:
+                    continue
+                return True
+        return False
+
+
+# Your TwoSum object will be instantiated and called as such:
+# twoSum = TwoSum()
+# twoSum.add(number)
+# twoSum.find(value)

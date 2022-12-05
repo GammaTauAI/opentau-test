@@ -1,7 +1,7 @@
 import os
 import json
 import time
-import random
+import inspect
 import subprocess
 from redbaron import RedBaron
 
@@ -11,57 +11,20 @@ from typing import Tuple, List
 
 
 # TODO: implement
-def _get_func_names(source_file: RedBaron) -> List[str]:
-    print(source_file.find_all('DefNode'))
+def _get_func_names(filename: str) -> List[str]:
+    res = inspect.getmembers(filename)
+
+# TODO: implement
+def _format_pyright_cmd(func_names: List[str]) -> str:
+    return ''
+
+# TODO: implement
+def _get_inferred_types(cmd: str) -> List[dict]:
     return []
 
-def _add_mypy_boilerplate(code: str, func_names: List[str]) -> str:
-    out =  f"""from typing_extensions import reveal_type
-
-*** MYPY BOILERPLATE START ***
-{code}
-*** MYPY BOILERPLATE END ***
-
-"""
-    for func_name in func_names: 
-        out += f'reveal_type({func_name})'
-    return out
-
-def _remove_mypy_boilerplate(code: str) -> str:
-    return code.split('*** MYPY BOILERPLATE START ***')[-1].split('*** BOILERPLATE END ***')[0]
-
-def _partial_stub_to_ast(partial_stub: str, func_name: str) -> RedBaron:
-    func_str = partial_stub.replace('def ', f'def {func_name}') + ':\npass'
-    return RedBaron(func_str)
-    
 # TODO: implement
-def _insert_func_stub(
-        func: RedBaron,
-        inferred_stub: RedBaron,
-    ) -> str:
+def _insert_types(code: str, inf_types: List[dict]) -> str:
     return ''
-
-# TODO: implement
-def _insert_partial_stubs(code: str, partial_stubs: List[str]) -> str:
-    return ''
-
-def _get_partial_stubs_from_mypy(code: str) -> List[str]:
-    tmp_f = f'/tmp/__mypy_bp{random.randint(0, 10000000)}.py'
-    with open(tmp_f, 'w') as wf:
-        wf.write(code)
-    cmd = f'mypy --follow-imports=skip {tmp_f}'
-    sp = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    out, err = sp.communicate()
-    os.remove(tmp_f)
-    if out:
-        res: List[str] = out.decode('utf-8').split('\n')
-        partial_stubs: List[str] = []
-        for line in res:
-            partial_stubs += [line.split('Revealed type is "')[-1][:-1]]
-        return partial_stubs
-    else:
-        raise Exception(err.decode('utf-8'))
-     
 
 def builtin_python_infer(filename: str, client_path: str) -> Tuple[bool, str, int]:
     """
@@ -72,12 +35,10 @@ def builtin_python_infer(filename: str, client_path: str) -> Tuple[bool, str, in
     """
     with open(filename, 'r') as rf:
         code = rf.read()
-        source_file = RedBaron(code)
-        func_names = _get_func_names(source_file)
-        with_w_mypy_bp = _add_mypy_boilerplate(code, func_names)
-        partial_stubs = _get_partial_stubs_from_mypy(with_w_mypy_bp)
-        inferred_w_mypy_bp = _insert_partial_stubs(with_w_mypy_bp, partial_stubs)
-        typeinf_code = _remove_mypy_boilerplate(inferred_w_mypy_bp)
+        func_names = _get_func_names(filename)
+        cmd = _format_pyright_cmd(func_names)
+        inf_types = _get_inferred_types(cmd)
+        typeinf_code = _insert_types(code, inf_types)
 
         proj_path = '/'.join(client_path.split('/')[0:-2])
         py_ast_server_path = f'{proj_path}/ps-ast/main.py'
@@ -112,11 +73,11 @@ def builtin_python_infer(filename: str, client_path: str) -> Tuple[bool, str, in
 
         with open(tmp_dir_path, 'w') as wf:
             wf.write(typeinf_code)
-        cmd = f"mypy mypy --follow-imports=skip {tmp_dir_path}"
-        proc = subprocess.Popen(
+        cmd = f"pyright {tmp_dir_path}"
+        sp = subprocess.Popen(
             cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        out, _ = proc.communicate()
-        did_typecheck = 'Success' in out.decode('utf-8')
+        _, _ = sp.communicate()
+        did_typecheck = sp.returncode == 0
         return did_typecheck, typeinf_code, score
 
 

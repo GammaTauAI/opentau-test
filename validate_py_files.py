@@ -15,11 +15,11 @@ def validate_py_files(read_dir: str, write_dir: str) -> None:
     for file in os.listdir(d):
         filename = os.fsdecode(file)
         if filename.endswith('.py'):
-            cmd = f'mypy --follow-imports=skip {os.path.join(read_dir, filename)}' 
+            cmd = f'pyright {os.path.join(read_dir, filename)}' 
             sp = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             out, err = sp.communicate()
             if out:
-                if 'Success' in out.decode('utf-8'):
+                if sp.returncode == 0:
                     type_validated_file_count += 1
                     shutil.copyfile(os.path.join(read_dir, filename), os.path.join(write_dir, f'{file_count}.py'))
                     file_count += 1

@@ -1,8 +1,20 @@
 class Solution(object):
-    def maxProfit(self, prices):
-        """
-        :type prices: List[int]
-        :rtype: int
-        """
-        # sum of prices[i + 1] - prices[i], if prices[i + 1] > prices[i]
-        return sum([y - x for x, y in zip(prices[0:-1], prices[1:]) if x < y])
+    # def isPowerOfThree(self, n):
+    #     """
+    #     :type n: int
+    #     :rtype: bool
+    #     """
+    #     import math
+    #     if n <= 0:
+    #         return False
+    #     # use round to check
+    #     log_res = round(math.log(n, 3), 10)
+    #     if log_res - int(log_res) > 0:
+    #         return False
+    #     return True
+
+    def isPowerOfThree(self, n):
+        max3pow = 1162261467
+        if n <= 0 or n > max3pow:
+            return False
+        return max3pow % n == 0

@@ -1,22 +1,29 @@
 class Solution(object):
-    def wordBreak(self, s, wordDict):
+    def setZeroes(self, matrix):
         """
-        :type s: str
-        :type wordDict: Set[str]
-        :rtype: bool
+        :type matrix: List[List[int]]
+        :rtype: void Do not return anything, modify matrix in-place instead.
         """
-        queue = [0]
-        ls = len(s)
-        lenList = [l for l in set(map(len, wordDict))]
-        visited = [0 for _ in range(0, ls + 1)]
-        while queue:
-            start = queue.pop(0)
-            for l in lenList:
-                if s[start:start + l] in wordDict:
-                    if start + l == ls:
-                        return True
-                    if visited[start + l] == 0:
-                        queue.append(start + l)
-                        visited[start + l] = 1
-        return False
-
+        if not matrix:
+            return
+        m = len(matrix)
+        if m == 0:
+            return
+        r = []
+        c = []
+        n = len(matrix[0])
+        for i in range(m):
+            for j in range(n):
+                if matrix[i][j] == 0:
+                    r.append(i)
+                    c.append(j)
+        # row with zero
+        r = set(r)
+        # column with zero
+        c = set(c)
+        for i in r:
+            for j in range(n):
+                matrix[i][j] = 0
+        for i in range(m):
+            for j in c:
+                matrix[i][j] = 0
