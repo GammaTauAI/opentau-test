@@ -83,10 +83,12 @@ def make_bar_graph(filepath):
         for rect, label in zip(ax.patches, labels):
             height = rect.get_height()
             # get the height of the label
-            ax.text(rect.get_x() + rect.get_width() / 2, height - (max_y / 5.5), label,
+            ax.text(rect.get_x() + rect.get_width() / 2, height - (max_y / 8), label,
                     ha='center', va='bottom')
 
         fig.tight_layout()
+        fig.set_figheight(7.5)
+        fig.set_figwidth(10)
         plt.savefig(OUTPUT_DIR + "successes_per_config.png")
         plt.close()
 
