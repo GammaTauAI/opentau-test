@@ -5,13 +5,14 @@ import random
 import subprocess
 from redbaron import RedBaron
 
-from ._utils import sendrecv_sock
+from _utils import sendrecv_sock
 
 from typing import Tuple, List
 
 
 # TODO: implement
 def _get_func_names(source_file: RedBaron) -> List[str]:
+    print(source_file.find_all('DefNode'))
     return []
 
 def _add_mypy_boilerplate(code: str, func_names: List[str]) -> str:
@@ -117,3 +118,9 @@ def builtin_python_infer(filename: str, client_path: str) -> Tuple[bool, str, in
         out, _ = proc.communicate()
         did_typecheck = 'Success' in out.decode('utf-8')
         return did_typecheck, typeinf_code, score
+
+
+if __name__ == '__main__':
+    with open('../temp.py', 'r') as f:
+        code = f.read()
+        _get_func_names(RedBaron(code)) 

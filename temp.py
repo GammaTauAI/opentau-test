@@ -1,5 +1,4 @@
 import builtins
-from typing_extensions import reveal_type
 
 
 class Solution:
@@ -13,5 +12,3 @@ class Solution:
     def sub(self, c, d):
         return c + d 
 
-reveal_type(Solution.add)
-reveal_type(Solution.sub)

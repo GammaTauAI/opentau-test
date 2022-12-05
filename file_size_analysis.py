@@ -84,7 +84,12 @@ def make_graph() -> None:
                 "Acc\n{}\nAvg Quality\n{}".format(acc, value[1]))
 
         fig, ax = plt.subplots()
-        ax.bar(x, y)
+        color = []
+        is_blue = True
+        for _ in range(len(x)):
+            color += ['blue'] if is_blue else ['orange']
+            is_blue = not is_blue
+        ax.bar(x, y, color=color)
         ax.set_title("Successes per configuration")
         ax.set_xlabel("Config")
         ax.set_ylabel("Proportion of successes (%)")
