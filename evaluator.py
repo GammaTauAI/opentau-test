@@ -4,10 +4,11 @@ import sys
 import json
 import subprocess
 import json
-import socket
-import base64
 
-from typing import Dict, List, Tuple, Type, TypeVar
+from permuation import Permutation
+from builtin_inference import builtin_python_infer, builtin_typescript_infer
+
+from typing import List
 
 # TODO:
 # - run tests with code with comments and without
@@ -39,26 +40,6 @@ if _CODEX_TOKEN is None:
     sys.exit(1)
 
 
-T = TypeVar('T', bound='Permutation')
-
-
-class Permutation:
-    def __init__(self, n: int, r: int, temp: float, strategy: str, model: str) -> None:
-        assert model == 'codex' or model == 'incoder' or model == 'builtin'
-        self.n = n
-        self.r = r
-        self.temp = temp
-        self.strategy = strategy
-        self.model = model
-
-    @classmethod
-    def deserialize(cls: Type[T], s: Dict) -> T:
-        return cls(**s)
-
-    def __repr__(self):
-        return f"Permutation(n={self.n}, r={self.r}, temp={self.temp}, strategy={self.strategy}, model={self.model})"
-
-
 # uses Popen to run a command with a timeout
 def run_with_timeout(cmd: List[str], timeout_sec: int) -> subprocess.Popen:
     proc = subprocess.Popen(cmd, stdout=subprocess.PIPE,
@@ -69,85 +50,6 @@ def run_with_timeout(cmd: List[str], timeout_sec: int) -> subprocess.Popen:
         proc.kill()
         proc.wait()
     return proc
-
-
-def builtin_typescript_infer(filename: str) -> Tuple[bool, str, int]:
-    """
-    runs the builtin type inference on the given typescript file,
-    returns whether it was able to type check the file and
-    the quality of the types it inferred. also returns the code
-    that was inferred.
-    """
-    def sendrecv_sock(sock, data):
-        s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-        s.connect(sock)
-        s.sendall(data)
-
-        data = s.recv(122880)  # reaaal bad way to do this
-        res = data.decode('utf-8')
-        s.close()
-        return res
-
-    # open file, get bytes
-    starting_code = base64.b64encode(
-        open(filename, 'rb').read()).decode("utf-8")
-
-    proj_path = '/'.join(_CLIENT_PATH.split('/')[0:-2])
-    npm_server_path = f'{proj_path}/ts-ast'
-
-    # run the server
-    this_pid = os.getpid()
-    sock_path = f"/tmp/test-sock-{this_pid}.sock"
-    # close socket if it exists
-    if os.path.exists(sock_path):
-        os.remove(sock_path)
-    cmd = f"npm start {sock_path} {this_pid}"
-    proc = subprocess.Popen(
-        cmd.split(), cwd=npm_server_path, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    time.sleep(3)  # wait for the server to start. really bad way to do this
-
-    # req to type-infer
-    req = {
-        "cmd": "weave",
-        "text": starting_code,
-        "nettle": starting_code,
-        "level": 0,
-    }
-
-    # send the request
-    typeinf_code = json.loads(sendrecv_sock(
-        sock_path, json.dumps(req).encode('utf-8')))["text"]
-    decdoded_code = base64.b64decode(typeinf_code).decode('utf-8')
-
-    # now we shall get the quality of the types
-    req = {
-        "cmd": "check",
-        "text": typeinf_code,
-        "original": typeinf_code,
-    }
-
-    # send the request
-    res = json.loads(sendrecv_sock(
-        sock_path, json.dumps(req).encode('utf-8')))
-    did_complete = bool(res["text"])
-    score = int(res["score"])
-
-    if not did_complete:
-        return did_complete, decdoded_code,  score
-
-    # now we typecheck the code, also close the server
-    proc.kill()
-    # write to temp path
-    tmp_dir_path = f"/tmp/builtin-typeinf-{this_pid}-{filename.split('/')[-1]}"
-    with open(f"{tmp_dir_path}", 'w') as f:
-        f.write(decdoded_code)
-
-    cmd = f"tsc --allowJs --checkJs --noEmit --target es2022 {tmp_dir_path}"
-    proc = subprocess.Popen(
-        cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    stdout, stderr = proc.communicate()
-    did_typecheck = proc.returncode == 0
-    return did_typecheck, decdoded_code, score
 
 
 def main() -> None:
@@ -201,21 +103,21 @@ def main() -> None:
                         sp = run_with_timeout(cmd_, 60 * 15)  # 15 minutes
                         status = sp.returncode
 
+                        assert not sp.stdout is None
                         out = sp.stdout.read().decode("utf-8")
                         if 'Rate limited' in out or 'rate limit' in out:
                             print(f"got rate limited. sleeping")
                             time.sleep(120)
                             sp = run_with_timeout(cmd_, 60 * 15)  # 15 minutes
                             status = sp.returncode
+                            assert not sp.stdout is None
                             out = sp.stdout.read().decode("utf-8")
                             if 'Rate limited' in out or 'rate limit' in out:
                                 print(f"got rate limited again!!!!")
                                 time.sleep(120)
                     else:
                         if lang == "ts":
-                            err = ""
-                            did_typecheck, output, score = builtin_typescript_infer(
-                                filepath)
+                            did_typecheck, output, score = builtin_typescript_infer(filepath, _CLIENT_PATH)
                             out = output
                             if did_typecheck:
                                 status = 0
@@ -225,6 +127,16 @@ def main() -> None:
                             else:
                                 status = 1
 
+                        # elif lang == "py":
+                            # did_typecheck, output, score = builtin_python_infer(filepath, _CLIENT_PATH)
+                            # out = output
+                            # if did_typecheck:
+                                # status = 0
+                                # # write code to outdir
+                                # with open(f"{outdir}/0_score_{score}.py", 'w') as out_f:
+                                    # out_f.write(output)
+                            # else:
+                                # status = 1
                         else:
                             assert False, f"lang {lang} not supported"
 
