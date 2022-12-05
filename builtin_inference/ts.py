@@ -1,9 +1,11 @@
 import os
 import json
 import time
-import socket
 import base64
 import subprocess
+
+from ._utils import sendrecv_sock
+
 from typing import Tuple
 
 
@@ -14,15 +16,6 @@ def builtin_typescript_infer(filename: str, client_path: str) -> Tuple[bool, str
     the quality of the types it inferred. also returns the code
     that was inferred.
     """
-    def sendrecv_sock(sock, data):
-        s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-        s.connect(sock)
-        s.sendall(data)
-
-        data = s.recv(122880)  # reaaal bad way to do this
-        res = data.decode('utf-8')
-        s.close()
-        return res
 
     # open file, get bytes
     starting_code = base64.b64encode(
@@ -75,7 +68,7 @@ def builtin_typescript_infer(filename: str, client_path: str) -> Tuple[bool, str
     proc.kill()
     # write to temp path
     tmp_dir_path = f"/tmp/builtin-typeinf-{this_pid}-{filename.split('/')[-1]}"
-    with open(f"{tmp_dir_path}", 'w') as f:
+    with open(tmp_dir_path, 'w') as f:
         f.write(decdoded_code)
 
     cmd = f"tsc --allowJs --checkJs --noEmit --target es2022 {tmp_dir_path}"

@@ -13,7 +13,6 @@ from typing import List
 # TODO:
 # - run tests with code with comments and without
 
-
 if len(sys.argv) > 6 or len(sys.argv) < 5:
     print(
         f"USAGE: {sys.argv[0]} test-file-dir/ perm.json client.bin out/results.csv")
