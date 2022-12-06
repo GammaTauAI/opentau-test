@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def arrangeCoins(self, n : Any) -> int:
         level = 0
@@ -5,3 +8,4 @@ class Solution(object):
             level += 1
             n -= level
         return level
+

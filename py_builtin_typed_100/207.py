@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def numIslands2(self, m : Any, n : Any, positions : Any) -> typing.List[Any]:
         """
@@ -48,3 +51,4 @@ class Union(object):
         self.id[i] = j
         self.sz[j] += self.sz[i]
         self.count -= 1
+

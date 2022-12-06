@@ -63,7 +63,6 @@ def _get_inferred_types(code: str, method_names: List[str]) -> Dict[str, dict]:
     return data
 
 def _insert_types(code: str, inf_types: Dict[str, dict]) -> str:
-    print(inf_types)
     ast = RedBaron(code)
     class_nodes = ast.find_all('ClassNode')
     for c in class_nodes:
@@ -137,22 +136,22 @@ def builtin_python_infer(filename: str, client_path: str) -> Tuple[bool, str, in
 if __name__ == '__main__':
     DIR = './py_untyped_100_validated'
     dir_ = os.fsencode(DIR)
-    skipped = 0
+    num_files = 0
     for file in os.listdir(dir_):
-        try:
-            filename = os.fsdecode(file)
-            if filename.endswith('.py'):
-                with open(os.path.join(DIR, filename), 'r') as rf:
-                    code = rf.read()
-                with open('./temp.py', 'w') as wf:
-                    wf.write(code)
-                method_names = _get_method_names(code)
-                inf_types = _get_inferred_types(code, method_names)
-                typeinf_code = _insert_types(code, inf_types)
-                print(typeinf_code)
-                with open(os.path.join(_WRITE_DIR, filename), 'w') as f:
-                    f.write(typeinf_code)
-        except Exception:
-            skipped += 1
-            continue
-    print(f'skipped {skipped} files')
+        filename = os.fsdecode(file)
+        if filename.endswith('.py'):
+            with open(os.path.join(DIR, filename), 'r') as rf:
+                code = rf.read()
+            with open('./temp.py', 'w') as wf:
+                wf.write(code)
+            method_names = _get_method_names(code)
+            inf_types = _get_inferred_types(code, method_names)
+            typeinf_code = _insert_types(code, inf_types)
+            with open(os.path.join(_WRITE_DIR, filename), 'w') as f:
+                f.write(f"""import typing
+from typing import *
+
+{typeinf_code}
+""")
+                num_files += 1
+    print(f'typed {num_files} files')

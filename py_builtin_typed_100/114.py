@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution:
     # import itertools
     # def permute(self, nums):
@@ -42,3 +45,4 @@ class Solution:
     #                     cache.add(stemp)
     #                     res.append(new_perm)
     #     return res
+

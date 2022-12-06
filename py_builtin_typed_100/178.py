@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def numberOfPatterns(self, m : Any, n : Any) -> int:
         """
@@ -41,3 +44,4 @@ class Solution(object):
                 res += self.calc_patterns(used, i, length - 1)
                 used[i] = False
         return res
+

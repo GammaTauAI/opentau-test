@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     # def validWordAbbreviation(self, word, abbr):
     #     """
@@ -56,3 +59,4 @@ class Solution(object):
 
 
         
+

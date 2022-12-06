@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def simplifyPath(self, path : Any) -> str:
         """
@@ -18,3 +21,4 @@ class Solution(object):
                 elif pos != '.':
                     result.append(pos)
         return '/'+'/'.join(result)
+

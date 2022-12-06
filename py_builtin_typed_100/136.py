@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def isStrobogrammatic(self, num : Any) -> bool:
         """
@@ -19,3 +22,4 @@ class Solution(object):
     #     # https://discuss.leetcode.com/topic/20840/1-liners-python
     #     return all(num[i] + num[~i] in '696 00 11 88' for i in range(len(num)/2+1))
         
+

@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def minimumTotal(self, triangle : Any) -> int:
         """
@@ -16,3 +19,4 @@ class Solution(object):
                 dp[j] = min(dp[j - 1] + triangle[i][j], dp[j] + triangle[i][j])
             dp[0] = dp[0] + triangle[i][0]
         return min(dp)
+

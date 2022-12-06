@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     # def lengthOfLongestSubstring(self, s):
     #     """
@@ -69,3 +72,4 @@ class Solution(object):
             charMap[ord(s[j])] = j
             max_len = max(max_len, j - i + 1)
         return max_len
+

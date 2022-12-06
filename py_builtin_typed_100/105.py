@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def productExceptSelf(self, nums : Any) -> typing.List[int]:
         """
@@ -12,3 +15,4 @@ class Solution(object):
             ans[i] *= right
             right *= nums[i]
         return ans
+

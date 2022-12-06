@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution:
     def defangIPaddr(self, address : str) -> str:
         # replace
@@ -10,3 +13,4 @@ class Solution:
     #     return re.sub('\.', '[.]', address)
     # def defangIPaddr(self, address: str) -> str:
     #     return ''.join('[.]' if c == '.' else c for c in address)
+

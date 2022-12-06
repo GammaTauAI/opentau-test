@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 # class Solution(object):
 #     def generateParenthesis(self, n):
 #         """
@@ -31,3 +34,4 @@ class Solution(object):
     #     s = ''
     #     generate(n, n, s, result)
     #     return result
+

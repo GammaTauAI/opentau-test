@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     # def plusOne(self, digits):
     #     """
@@ -31,5 +34,6 @@ class Solution(object):
                 digits[index] = 0
         digits.insert(0, 1)
         return digits
+
 
 

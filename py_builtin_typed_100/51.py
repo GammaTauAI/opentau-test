@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 # Definition for a binary tree node.
 # class TreeNode(object):
 #     def __init__(self, x):
@@ -49,3 +52,4 @@ class Solution(object):
         self.result = 0
         self.pathSumHelper(root, sum, 0, {0: 1})
         return self.result
+

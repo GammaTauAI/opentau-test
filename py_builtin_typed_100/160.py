@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     # def isPowerOfThree(self, n):
     #     """
@@ -18,3 +21,4 @@ class Solution(object):
         if n <= 0 or n > max3pow:
             return False
         return max3pow % n == 0
+

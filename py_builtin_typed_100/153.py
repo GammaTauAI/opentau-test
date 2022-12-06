@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def findMissingRanges(self, nums : Any, lower : Any, upper : Any) -> typing.List[str]:
         """
@@ -19,3 +22,4 @@ class Solution(object):
                 ranges.append("%d" % (prev + 1))
             prev = curr
         return ranges
+

@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def addDigits(self, num : Any) -> Any:
         """
@@ -8,3 +11,4 @@ class Solution(object):
         if num < 10:
             return num
         return num - ((num - 1) / 9) * 9
+

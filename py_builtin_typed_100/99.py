@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution:
     def countAndSay(self, n : Any) -> str:
         """
@@ -25,3 +28,4 @@ class Solution:
                 res += [j - i, m[i]]
                 i = j
         return ''.join(str(s) for s in res)
+

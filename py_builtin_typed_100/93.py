@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution:
     def jump(self, nums : Any) -> int:
         """
@@ -18,3 +21,4 @@ class Solution:
             end = maxDis
             step += 1
         return step
+

@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def poorPigs(self, buckets : Any, minutesToDie : Any, minutesToTest : Any) -> int:
         """
@@ -11,3 +14,4 @@ class Solution(object):
         while (minutesToTest / minutesToDie + 1) ** pigs < buckets:
             pigs += 1
         return pigs
+

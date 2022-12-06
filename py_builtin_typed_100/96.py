@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution:
     def minOperationsMaxProfit(self, customers : typing.List[int], boardingCost : int, runningCost : int) -> int:
         profit =0
@@ -47,3 +50,4 @@ b = 3
 r = 8
 print(s1.minOperationsMaxProfit(num,b,r))
         
+

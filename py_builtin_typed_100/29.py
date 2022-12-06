@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def reverseString(self, s : Any) -> Any:
         """
@@ -6,3 +9,4 @@ class Solution(object):
         """
         # slice
         return s[::-1]
+

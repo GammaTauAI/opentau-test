@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 # Definition for an interval.
 # class Interval(object):
 #     def __init__(self, s=0, e=0):
@@ -35,3 +38,4 @@ class Solution(object):
             if intervals[i].end > intervals[i + 1].start:
                 return False
         return True
+

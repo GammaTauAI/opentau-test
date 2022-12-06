@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def solveSudoku(self, board : Any) -> None:
         """
@@ -39,5 +42,6 @@ class Solution(object):
                 if board[i][j] == ch:
                     return False
         return True
+
 
 

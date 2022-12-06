@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def numDecodings(self, s : Any) -> int:
         """
@@ -22,3 +25,4 @@ class Solution(object):
                     # 1-9
                     dp[index] += dp[index - 1]
         return dp[ls - 1]
+

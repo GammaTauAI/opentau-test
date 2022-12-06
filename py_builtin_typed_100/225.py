@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     # https://leetcode.com/problems/convert-bst-to-greater-tree/solution/
     # def __init__(self):
@@ -32,3 +35,4 @@ class Solution(object):
             node = node.left
 
         return root
+

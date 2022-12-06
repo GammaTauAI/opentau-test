@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def isInterleave(self, s1 : Any, s2 : Any, s3 : Any) -> bool:
         """
@@ -30,3 +33,4 @@ class Solution(object):
                 if s2[p[1]] == s3[index]:
                     queue.append((p[0], p[1] + 1))
         return False
+

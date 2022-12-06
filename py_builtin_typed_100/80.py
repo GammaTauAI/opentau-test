@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def compress(self, chars : Any) -> int:
         """
@@ -16,3 +19,4 @@ class Solution(object):
                         write += 1
                 anchor = read + 1
         return write
+

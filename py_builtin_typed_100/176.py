@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     # def findShortestSubArray(self, nums):
     #     """
@@ -39,3 +42,4 @@ class Solution(object):
                 ans = min(ans, right[x] - left[x] + 1)
 
         return ans
+

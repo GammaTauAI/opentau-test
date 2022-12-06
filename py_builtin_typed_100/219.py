@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def isHappy(self, n : Any) -> Any:
         """
@@ -10,3 +13,4 @@ class Solution(object):
             seen_numbers.add(n)
             n = sum(map(lambda x: int(x) * int(x), list(str(n))))
         return n == 1
+

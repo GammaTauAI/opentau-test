@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def solve(self, board : Any) -> None:
         # https://discuss.leetcode.com/topic/22503/some-tips-for-python-code
@@ -41,5 +44,6 @@ class Solution(object):
     #             board[i][j] = 'S'
     #             save += (i, j - 1), (i, j + 1), (i - 1, j), (i + 1, j)
     #     board[:] = [['XO'[c == 'S'] for c in row] for row in board]
+
 
 

@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def majorityElement(self, nums : Any) -> typing.List[Any]:
         # O(1) space
@@ -44,3 +47,4 @@ class Solution(object):
     #         if v > len(nums) / 3:
     #             res.append(k)
     #     return res
+

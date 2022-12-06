@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def minMoves(self, nums : Any) -> Any:
         """
@@ -8,3 +11,4 @@ class Solution(object):
             return 0
         min_num = min(nums)
         return sum([i - min_num for i in nums])
+

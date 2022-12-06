@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, x):
@@ -25,3 +28,4 @@ class Solution:
             self.get_path(result, path, node.left)
         if node.right is not None:
             self.get_path(result, path, node.right)
+

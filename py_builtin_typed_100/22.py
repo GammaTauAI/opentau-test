@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     # def largestDivisibleSubset(self, nums):
     #     """
@@ -22,3 +25,4 @@ class Solution(object):
             # max previous with curr
             S[num] = max(candicate, key=len) | {num}
         return 
+

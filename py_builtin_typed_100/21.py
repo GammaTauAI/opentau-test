@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     # def containsNearbyDuplicate(self, nums, k):
     #     """
@@ -33,4 +36,5 @@ class Solution(object):
             else:
                 check.add(nums[i])
         return False
+
 

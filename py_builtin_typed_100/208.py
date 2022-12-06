@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def findAnagrams(self, s : Any, p : Any) -> typing.List[Any]:
         """
@@ -66,3 +69,4 @@ class Solution(object):
     #         if sCounter[s[i-len(p)+1]] == 0:
     #             del sCounter[s[i-len(p)+1]]   # remove the count if it is 0
     #     return res
+

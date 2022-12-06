@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 # Definition for a binary tree node.
 # class TreeNode(object):
 #     def __init__(self, x):
@@ -43,3 +46,4 @@ class Solution(object):
                 stack.append(curr.left)
                 stack.append(curr.right)
         return ans if ans < float('inf') else -1
+

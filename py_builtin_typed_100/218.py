@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 # Definition for a point.
 # class Point(object):
 #     def __init__(self, a=0, b=0):
@@ -44,4 +47,5 @@ class Solution(object):
             return x
         else:
             return self.generateGCD(y, x % y)
+
 

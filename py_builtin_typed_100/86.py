@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution:
     def reverseStr(self, s : str, k : int) -> str:
         N = len(s)
@@ -21,3 +24,4 @@ s1 = Solution()
 s="abcdefg"
 k=2
 print(s1.reverseStr(s,k))
+

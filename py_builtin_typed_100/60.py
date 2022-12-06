@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def findMaxConsecutiveOnes(self, nums : Any) -> int:
         """
@@ -16,3 +19,4 @@ class Solution(object):
                 # Add 1 to curr when encounter 1
                 curr = 0
         return ans
+

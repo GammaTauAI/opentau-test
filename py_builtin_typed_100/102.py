@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def findRadius(self, houses : Any, heaters : Any) -> int:
         """
@@ -14,3 +17,4 @@ class Solution(object):
             # ans = hearter - hourse
             r = max(r, abs(heaters[i] - x))
         return r
+

@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def subarraySum(self, nums : Any, k : Any) -> int:
         """
@@ -15,3 +18,4 @@ class Solution(object):
             # add curr_sum to hash
             sum_map[curr_sum] = sum_map.get(curr_sum, 0) + 1
         return count
+

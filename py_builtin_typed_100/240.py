@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def isToeplitzMatrix(self, matrix : Any) -> bool:
         """
@@ -10,3 +13,4 @@ class Solution(object):
                 if matrix[r][c] != matrix[r + 1][c + 1]:
                     return False
         return True
+

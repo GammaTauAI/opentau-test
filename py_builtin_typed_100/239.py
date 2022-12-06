@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 # Definition for a binary tree node.
 # class TreeNode(object):
 #     def __init__(self, x):
@@ -41,4 +44,5 @@ class Solution(object):
             if record:
                 q.append(record)
         return [[x.val for x in level] for level in q]
+
 

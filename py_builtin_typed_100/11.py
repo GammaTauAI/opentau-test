@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution:
     # https://leetcode.com/problems/longest-palindrome/solution/
     # def longestPalindrome(self, s):
@@ -20,3 +23,4 @@ class Solution:
         if len(char_map) != 0:
             ans += 1
         return ans
+

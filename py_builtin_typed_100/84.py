@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def setZeroes(self, matrix : Any) -> None:
         """
@@ -27,3 +30,4 @@ class Solution(object):
         for i in range(m):
             for j in c:
                 matrix[i][j] = 0
+

@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 # Definition for singly-linked list.
 # class ListNode(object):
 #     def __init__(self, x):
@@ -49,3 +52,4 @@ class Solution(object):
             p1 = p1.next
             p3 = p3.next
         return True
+

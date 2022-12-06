@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def lengthOfLongestSubstringKDistinct(self, s : Any, k : Any) -> int:
         """
@@ -20,3 +23,4 @@ class Solution(object):
                 i += 1
             maxLen =  max(j - i + 1, maxLen)
         return maxLen
+

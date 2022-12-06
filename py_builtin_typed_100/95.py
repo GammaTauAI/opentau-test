@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     # def hIndex(self, citations):
     #     """
@@ -31,3 +34,4 @@ class Solution(object):
             k -= 1
             s += papers[k]
         return k
+

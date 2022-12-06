@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 # Definition for a binary tree node.
 # class TreeNode(object):
 #     def __init__(self, x):
@@ -43,4 +46,5 @@ class Solution(object):
                 else:
                     rightMost = node.left
         return depth
+
 

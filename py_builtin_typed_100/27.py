@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def findTheDifference(self, s : Any, t : Any) -> str:
         """
@@ -17,3 +20,4 @@ class Solution(object):
     #         res ^= ord(c)
     #     return chr(res)
         
+

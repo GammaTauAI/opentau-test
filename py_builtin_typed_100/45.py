@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     # def maximalSquare(self, matrix):
     #     """
@@ -58,4 +61,5 @@ class Solution(object):
                     dp[j] = 0
                 prev = temp
         return res * res
+
 

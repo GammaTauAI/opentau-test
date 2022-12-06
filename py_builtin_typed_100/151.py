@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def anagramMappings(self, A : Any, B : Any) -> typing.List[int]:
         """
@@ -12,3 +15,4 @@ class Solution(object):
         for n in A:
             ans.append(val_index[n])
         return ans
+

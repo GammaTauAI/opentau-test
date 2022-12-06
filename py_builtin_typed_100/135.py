@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution:
     def uniquePaths(self, m : Any, n : Any) -> Any:
         """
@@ -19,3 +22,4 @@ class Solution:
                     l = dmap[i][j-1]
                 dmap[i][j] = l + u
         return dmap[m-1][n-1]
+

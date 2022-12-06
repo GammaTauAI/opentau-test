@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def maximalRectangle(self, matrix : Any) -> int:
         """
@@ -30,6 +33,7 @@ class Solution(object):
             for j in range(ls_col):
                 maxA = max(maxA, (right[j] - left[j]) * height[j])
         return maxA
+
 
 
 

@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     # def hammingWeight(self, n):
     #     """
@@ -19,3 +22,4 @@ class Solution(object):
             n &= n - 1
             count += 1
         return count
+

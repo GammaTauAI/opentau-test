@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def candy(self, ratings : Any) -> int:
         """
@@ -16,4 +19,5 @@ class Solution(object):
             if ratings[i - 1] > ratings[i]:
                 num[i - 1] = max(num[i] + 1, num[i - 1])
         return sum(num)
+
 

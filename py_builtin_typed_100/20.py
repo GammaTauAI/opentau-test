@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 
 class Solution(object):
     def toHex(self, num : Any) -> str:
@@ -29,3 +32,4 @@ class Solution(object):
 
     # def toHex(self, num, h=''):
     #     return (not num or h[7:]) and h or self.toHex(num / 16, '0123456789abcdef'[num % 16] + h)
+

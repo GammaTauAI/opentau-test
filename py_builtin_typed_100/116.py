@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     # def strStr(self, haystack, needle):
     #     """
@@ -67,4 +70,5 @@ class Solution(object):
             if needle[i] != needle[j]:
                 j = next[j]
         return next
+
 

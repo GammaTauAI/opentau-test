@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def canCompleteCircuit(self, gas : Any, cost : Any) -> int:
         """
@@ -20,4 +23,5 @@ class Solution(object):
             return end
         else:
             return -1
+
 

@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def nextPermutation(self, nums : Any) -> None:
         """
@@ -48,6 +51,7 @@ class Solution(object):
     # def re_order(self, a, start, end):
     #     for i in range(0, (end - start + 1) // 2):
     #         a[start + i], a[end - i] = a[end - i], a[start + i]
+
 
 
 

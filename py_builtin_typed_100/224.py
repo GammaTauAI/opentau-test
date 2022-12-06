@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution:
     def countDaysTogether(self, arriveAlice : str, leaveAlice : str, arriveBob : str, leaveBob : str) -> int:
         # split the dates to month and day.
@@ -36,3 +39,4 @@ class Solution:
 
         # I used list because of this sum function.
         return sum(spentTogether)
+

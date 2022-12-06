@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def firstMissingPositive(self, nums : Any) -> int:
         """
@@ -19,3 +22,4 @@ class Solution(object):
         while res < ls and nums[res] == res + 1:
             res += 1
         return res + 1
+

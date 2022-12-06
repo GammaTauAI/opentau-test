@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     # def canPartition(self, nums):
     #     """
@@ -33,3 +36,4 @@ class Solution(object):
             for i in range(target, num - 1, -1):
                 dp[i] = dp[i] | dp[i - num]
         return dp[target] == 1
+

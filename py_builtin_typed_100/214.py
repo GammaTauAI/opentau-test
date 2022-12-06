@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class ValidWordAbbr(object):
     def __init__(self, dictionary : Any) -> None:
         """
@@ -35,3 +38,4 @@ class ValidWordAbbr(object):
         # vwa = ValidWordAbbr(dictionary)
         # vwa.isUnique("word")
         # vwa.isUnique("anotherWord")
+

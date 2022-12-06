@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 # class MinStack(object):
 #     def __init__(self):
 #         """
@@ -101,3 +104,4 @@ class MinStack(object):
         if len(self.min_stack) > 0:
             return self.min_stack[-1]
         return None
+

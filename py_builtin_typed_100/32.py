@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 # Definition for a binary tree node.
 # class TreeNode(object):
 #     def __init__(self, x):
@@ -29,3 +32,4 @@ class Solution(object):
             leavels.append(node.val)
         self.dfs(node.left, leavels)
         self.dfs(node.right, leavels)
+

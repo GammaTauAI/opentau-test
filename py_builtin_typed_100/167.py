@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 from collections import defaultdict
 
 class TimeMap(object):
@@ -24,3 +27,4 @@ class TimeMap(object):
                 r = mid - 1
         
         return res
+

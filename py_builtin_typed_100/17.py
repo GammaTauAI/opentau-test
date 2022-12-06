@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def licenseKeyFormatting(self, S : Any, K : Any) -> Any:
         """
@@ -17,3 +20,4 @@ class Solution(object):
             res += '-' + S[pos:pos + K]
             pos += K
         return res
+

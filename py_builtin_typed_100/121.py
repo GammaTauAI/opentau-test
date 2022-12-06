@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     # def coinChange(self, coins, amount):
     #     """
@@ -46,3 +49,4 @@ class Solution(object):
         if dp[amount] == 1000000000:
             return -1
         return dp[amount]
+

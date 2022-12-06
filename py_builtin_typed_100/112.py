@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     # def numWays(self, n, k):
     #     """
@@ -26,3 +29,4 @@ class Solution(object):
             dp[1] = sum(dp) * (k - 1)
             dp[0] = temp
         return dp[1]
+

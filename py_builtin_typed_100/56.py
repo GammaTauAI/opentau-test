@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def reverseVowels(self, s : Any) -> str:
         """
@@ -21,4 +24,5 @@ class Solution(object):
             else:
                 res.append(s[index])
         return ''.join(res)
+
 

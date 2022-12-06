@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def maxProfit(self, prices : Any) -> int:
         """
@@ -16,3 +19,4 @@ class Solution(object):
                 if temp > max_profit:
                     max_profit = temp
         return max_profit
+

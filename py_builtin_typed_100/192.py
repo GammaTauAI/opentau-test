@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def wordPattern(self, pattern : Any, str : Any) -> bool:
         """
@@ -20,3 +23,4 @@ class Solution(object):
             pattern_to_words[curr_p] = pattern_to_words.get(curr_p, word)
             words_to_pattern[word] = words_to_pattern.get(word, curr_p)
         return True
+

@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 # class Queue(object):
 #     def __init__(self):
 #         """
@@ -81,3 +84,4 @@ class Queue(object):
         :rtype: bool
         """
         return len(self.stack1) + len(self.stack2) == 0
+

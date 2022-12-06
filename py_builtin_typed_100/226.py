@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class TwoSum(object):
 
     def __init__(self) -> None:
@@ -38,3 +41,4 @@ class TwoSum(object):
 # twoSum = TwoSum()
 # twoSum.add(number)
 # twoSum.find(value)
+

@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 # class Solution(object):
 #     def findPeakElement(self, nums):
 #         """
@@ -17,3 +20,4 @@ class Solution(object):
             else:
                 end = mid
         return start
+

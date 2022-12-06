@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 # Definition for a binary tree node.
 # class TreeNode(object):
 #     def __init__(self, x):
@@ -64,3 +67,4 @@ class Solution(object):
         while q not in ancestors:
             q = parent[q]
         return q
+

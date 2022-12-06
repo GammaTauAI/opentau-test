@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     def numJewelsInStones(self, J : Any, S : Any) -> int:
         """
@@ -13,3 +16,4 @@ class Solution(object):
             if c in j_set:
                 ans += 1
         return ans
+

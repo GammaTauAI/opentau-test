@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution(object):
     # def singleNumber(self, nums):
     #     """
@@ -31,3 +34,4 @@ class Solution(object):
         for num in nums:
             res ^= num
         return res
+

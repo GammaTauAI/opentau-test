@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class Solution:
     # def searchInsert(self, nums, target):
     #     """
@@ -41,3 +44,4 @@ if __name__ == '__main__':
     s = Solution()
     print (s.searchInsert([1,3,5,6],5))    
     
+

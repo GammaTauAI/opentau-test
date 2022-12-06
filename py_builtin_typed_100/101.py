@@ -1,3 +1,6 @@
+import typing
+from typing import *
+
 class RecentCounter(object):
 
     def __init__(self) -> None:
@@ -17,3 +20,4 @@ class RecentCounter(object):
 # Your RecentCounter object will be instantiated and called as such:
 # obj = RecentCounter()
 # param_1 = obj.ping(t)
+
