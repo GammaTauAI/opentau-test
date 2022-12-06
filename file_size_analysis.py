@@ -70,13 +70,15 @@ def make_graph() -> None:
         keys_map = {}
         labels = []
         for key, value in results.items():
+            if key[5] == '1':
+                continue
             ket_str_pre = "{}-{}".format(key[0], key[2])
             if ket_str_pre not in keys_map:
                 keys_map[ket_str_pre] = 0
             else:
                 keys_map[ket_str_pre] += 1
 
-            ket_str = "{}-{}-{}-{}".format(key[0], key[2], keys_map[ket_str_pre], "short" if key[-1] else "long")
+            ket_str = "{}-{}-{}-{}".format(key[0], key[2], keys_map[ket_str_pre], "s" if key[-1] else "l")
             x.append(ket_str)
             acc = round((value[0] / value[2]) * 100, 2)
             y.append(acc)
@@ -87,10 +89,10 @@ def make_graph() -> None:
         color = []
         is_blue = True
         for _ in range(len(x)):
-            color += ['blue'] if is_blue else ['orange']
+            color += ['cadetblue'] if is_blue else ['orange']
             is_blue = not is_blue
         ax.bar(x, y, color=color)
-        ax.set_title("Successes per configuration")
+        ax.set_title("Accuracy per configuration")
         ax.set_xlabel("Config")
         ax.set_ylabel("Proportion of successes (%)")
         # make y axis got up to max_y
@@ -104,6 +106,8 @@ def make_graph() -> None:
                     ha='center', va='bottom')
 
         # fig.tight_layout()
+        plt.setp(ax.get_xticklabels(), fontsize=8, rotation=30)
+        plt.subplots_adjust(bottom=0.15)
         plt.savefig(OUTPUT_DIR + "successes_per_config.png")
         plt.close()
 

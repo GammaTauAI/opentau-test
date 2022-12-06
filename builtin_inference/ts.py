@@ -4,7 +4,7 @@ import time
 import base64
 import subprocess
 
-from ._utils import sendrecv_sock
+from _utils import sendrecv_sock
 
 from typing import Tuple
 
