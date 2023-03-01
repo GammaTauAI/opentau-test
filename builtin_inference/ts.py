@@ -22,7 +22,7 @@ def builtin_typescript_infer(filename: str, client_path: str) -> Tuple[bool, str
         open(filename, 'rb').read()).decode("utf-8")
 
     proj_path = '/'.join(client_path.split('/')[0:-2])
-    npm_server_path = f'{proj_path}/ts-ast'
+    npm_server_path = f'{proj_path}/ts-compiler'
 
     # run the server
     this_pid = os.getpid()
